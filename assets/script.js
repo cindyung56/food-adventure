@@ -1,4 +1,4 @@
-//Define user preference variables
+//Define user preference variables\
 var userPreference;
 var testUrl =
   "https://thezipcodes.com/api/v1/search?zipCode=13040&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081";
@@ -7,6 +7,9 @@ var userAddressInputBtn = $("");
 var yelpApiKey;
 var latitude;
 var longitude;
+var questionIndex = 0;
+var prefBtn = document.querySelector("#prefBtn");
+var ulCreate = document.createElement("ul");
 
 //Prompt the user to get their location data or have them enter address/zip code
 function getUserLocation() {
@@ -63,7 +66,17 @@ function pickRandRestaurants() {
 var questions = [
   {
     question: "Do you have any allergies?",
-    choices: ["skip"],
+    choices: [
+      "Milk",
+      "tree nuts",
+      "eggs",
+      "peanuts",
+      "fish",
+      "wheat",
+      "shellfish",
+      "soybeans",
+      "skip",
+    ],
   },
 
   {
@@ -73,9 +86,37 @@ var questions = [
 
   {
     question: "Which food ethnicities do you prefer?",
-    choices: ["American", "Asian", "Italian", "Mexican", ""],
+    choices: ["American", "Asian", "Italian", "Mexican", "skip"],
   },
 ];
+
+// Takes user to questionIndex
+prefBtn.addEventListener("click", function () {
+  render(questionIndex);
+});
+
+// Display questionnaire questions and preferences
+function render(questionIndex) {
+  // clears question data/elements
+  content.innerHTML = "";
+  ulCreate.innerHTML = "";
+  for (var i = 0; i < questions.length; i++) {
+    var userQuestion = questions[questionIndex].question;
+    var userChoices = questions[questionIndex].choices;
+    content.textContent = userQuestion;
+  }
+  // forEach function creates a list element for each preference option
+  userChoices.forEach(function (newItem) {
+    var listItem = document.createElement("li");
+    listItem.textContent = newItem;
+    content.appendChild(ulCreate);
+    ulCreate.appendChild(listItem);
+    // TODO: Create response to log preferences to local storage and also take to next question
+    listItem.addEventListener("click", function () {
+      render(questionIndex);
+    });
+  });
+}
 
 //Get the preferences from local storage and store them in the global variables
 function getPreferences() {}
