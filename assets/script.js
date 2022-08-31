@@ -7,6 +7,13 @@ var yelpApiKey;
 var latitude;
 var longitude;
 
+var questionairreArray = [
+  {
+    question: "Are you allergic to anything? Click all that apply.",
+    options: ["peanuts", "tree nuts", "sesame", "eggs", "milk", "fish", "soybeans", "shellfish", "wheat", ""]
+  }
+]
+
 //Prompt the user to get their location data or have them enter address/zip code
 function getUserLocation() {
     var zipCodeApiUrl = 'https://thezipcodes.com/api/v1/search?zipCode='
@@ -56,7 +63,9 @@ function pickRandRestaurants() {
 
 //Get the preferences from local storage and store them in the global variables
 function getPreferences() {
-  console.log("This button works!");
+  // console.log("This button works!");
+
+  
 }
 
 //Store the user preferences (allergies, location, cost)
