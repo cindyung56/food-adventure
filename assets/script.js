@@ -1,5 +1,5 @@
 //Define user preference variables
-var userPreference;
+var userPreferencesBtn = $('#prefBtn');
 var testUrl = 'https://thezipcodes.com/api/v1/search?zipCode=13040&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081'
 var userAddressInput = $('');
 var userAddressInputBtn = $('');
@@ -56,7 +56,7 @@ function pickRandRestaurants() {
 
 //Get the preferences from local storage and store them in the global variables
 function getPreferences() {
-
+  console.log("This button works!");
 }
 
 //Store the user preferences (allergies, location, cost)
@@ -82,3 +82,4 @@ function restaurantNewPage() {
 //Event listeners
 userAddressInputBtn.on('click', getUserLocation);
 
+userPreferencesBtn.on('click', getPreferences);
