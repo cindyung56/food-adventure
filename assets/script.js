@@ -1,9 +1,10 @@
 //Define user preference variables
 var userPreference;
 var testUrl = 'https://thezipcodes.com/api/v1/search?zipCode=13040&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081'
-var userAddressInput = $('');
-var userAddressInputBtn = $('');
-var yelpApiKey;
+var userAddressInput = $('#address-input');
+var userAddressInputBtn = $('#address-btn');
+var randomBtn = $('#randomizeBtn');
+var yelpApiKey = 'tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx';
 var latitude;
 var longitude;
 
@@ -81,4 +82,5 @@ function restaurantNewPage() {
 
 //Event listeners
 userAddressInputBtn.on('click', getUserLocation);
+randomBtn.on('click', pickRandRestaurants);
 
