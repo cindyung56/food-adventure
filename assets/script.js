@@ -16,44 +16,16 @@ var ulCreate = document.createElement("ul");
 
 //Prompt the user to get their location data or have them enter address/zip code
 function getUserLocation(event) {
-<<<<<<< HEAD
-    event.preventDefault();
-    var zipCodeApiUrl = 'https://thezipcodes.com/api/v1/search?zipCode='
-    if(isNaN(userAddressInput.val()) || userAddressInput.val().length > 5) {/*TODO add display to say they must enter a number*/
-      console.log('NOT A NUMBER');
-      return 0;
-    }
-    console.log(userAddressInput.val());
-    
-    
-    zipCodeApiUrl = zipCodeApiUrl + userAddressInput.val() + '&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081';
-
-    fetch(zipCodeApiUrl)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Success ZIP:', data);
-            latitude = data.location[0].latitude;
-            longitude = data.location[0].longitude;
-            console.log(latitude + '\n' + longitude);
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
-=======
   event.preventDefault();
-  var zipCodeApiUrl = "https://thezipcodes.com/api/v1/search?zipCode=";
-  if (isNaN(userAddressInput.val()) || userAddressInput.val().length > 5) {
-    /*TODO add display to say they must enter a number*/
-    console.log("NOT A NUMBER");
+  var zipCodeApiUrl = 'https://thezipcodes.com/api/v1/search?zipCode='
+  if(isNaN(userAddressInput.val()) || userAddressInput.val().length > 5) {/*TODO add display to say they must enter a number*/
+    console.log('NOT A NUMBER');
     return 0;
   }
   console.log(userAddressInput.val());
-
-  zipCodeApiUrl =
-    zipCodeApiUrl +
-    userAddressInput.val() +
-    "&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081";
->>>>>>> dfbbdbfc3edb6a778194282156997a16cee67a21
+    
+    
+  zipCodeApiUrl = zipCodeApiUrl + userAddressInput.val() + '&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081';
 
   fetch(zipCodeApiUrl)
     .then((response) => response.json())
