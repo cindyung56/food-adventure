@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="./assets/style.css" />
 
     <title>Placeholder App Name</title>
@@ -13,13 +16,19 @@
 
   <body>
     <div id="landing">
-      <div id="header">
+      <div id="content">
         <!-- App Title and Sub-Text -->
         <h1>Placeholder App Name</h1>
         <p>
           for when your friends are hangry but don't want to decide on a
           restaurant
         </p>
+        <form id="address-form">
+          <input id="address-input" type="text" />
+          <input id="address-btn" type="submit" />
+        </form>
+        <button id="randomizeBtn">just pick for me</button>
+        <button id="prefBtn">lemme choose preferences</button>
       </div>
       <form id="address-form"> 
         <input id="address-input" type="text">
@@ -38,6 +47,9 @@
           </div>
           <div class="modal-body">
             <p id="modalQuestion"></p>
+            <form id="questionnaireForm">
+
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Finish</button>
