@@ -33,13 +33,13 @@ function getUserLocation() {
 //TODO add a list of random search terms (e.g. deli, thai, indian, mexican, burgers)
 //TODO have the list change with preferences
 function pickRandRestaurants() {
-    var yelpApiUrl = 'https://api.yelp.com/v3/businesses/search?term=delis&latitude=';
-    //have a list of search terms and randomize then
+    var yelpApiUrl = 'https://api.yelp.com/v3/businesses/search?term=delis&per-page=10&latitude=';
+    //have a list of search terms and randomize them
 
     yelpApiUrl = yelpApiUrl + latitude + '&longitude=' + longitude;
 
-    fetch('https://example.com/profile', {
-        method: 'POST', // or 'PUT'
+    fetch(yelpApiUrl, {
+        method: 'GET', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer' + yelpApiKey,
