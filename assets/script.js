@@ -14,9 +14,9 @@ var questionIndex = 0;
 var formCreate = $("<form>");
 
 var dietaryAllergies;
-var dietaryPreferences;
+var dietaryRestrictions;
 var ethnicPreferences;
-var currentBudget;
+var budgetPreference;
 
 
 //Prompt the user to get their location data or have them enter address/zip code
@@ -100,17 +100,26 @@ var questions = [
       "Soybeans",
       "None",
     ],
+    keyValue: "allergies"
   },
 
   {
     question: "Do you have any dietary preferences/restrictions?",
     choices: ["Vegetarian", "Vegan", "Keto", "Kosher", "Gluten-Free", "None"],
+    keyValue: "preferences"
   },
 
   {
     question: "Which food ethnicities do you prefer?",
     choices: ["American", "Asian", "Italian", "Mexican", "None"],
+    keyValue: "ethnicities"
   },
+
+  {
+    question: "How much are you willing to spend?",
+    choices: ["$0-30", "$30-50", "$50-100", "$100+"],
+    keyValue: "cost"
+  }
 ];
 
 
@@ -123,27 +132,25 @@ function render() {
 
   var userQuestion = questions[questionIndex].question;
   var userChoices = questions[questionIndex].choices;
+  var currentKey = questions[questionIndex].keyValue;
   content.textContent = userQuestion;
 
 
   // forEach function creates a list element for each preference option
   userChoices.forEach(function (newItem) {
-    console.log(newItem);
+    // console.log(newItem);
     var listItem = $("<input>");
-    console.log(listItem);
+    // console.log(listItem);
     listItem.attr({
       "type": "checkbox",
       "value": newItem
     })
     var listItemLabel = $("<label>");
     listItemLabel.text(newItem);
-
-    
     
     $(formCreate).append(listItem);
     $(formCreate).append(listItemLabel);
     $(formCreate).append($("<br>"));
-    
 
   });
 
@@ -156,9 +163,13 @@ function render() {
   questionairreSubmitBtn = $('#questionairre-submit');
   questionairreSubmitBtn.on('click', function(event){
     event.preventDefault();
+    var checkedInputs = $('input:checked');
+    // console.log(checkedInputs);
+    
+    storePreferences(currentKey, checkedInputs);
     questionIndex++;
     if (questionIndex === questionIndex.length - 1){
-      // go to next function to display results
+      // TODO: go to next function to display results
     } else{
       render();
     }
@@ -169,12 +180,21 @@ function render() {
 
 //Get the preferences from local storage and store them in the global variables
 function getPreferences() {
-  // console.log("This button works!");
-  
+  dietaryAllergies = JSON.parse(localStorage.getItem("allergies"));
+  dietaryRestrictions = JSON.parse(localStorage.getItem("preferences"));
+  ethnicPreferences = JSON.parse(localStorage.getItem("ethnicities"));
+  budgetPreference = JSON.parse(localStorage.getItem("cost"));
 }
 
-//Store the user preferences (allergies, location, cost)
-function storePreferences() {}
+//Store the user preferences (allergies, location, cost) in localStorage
+function storePreferences(key, values) {
+  var optionsArray = [];
+  $.each(values, function () {
+      optionsArray.push($(this).val());
+    });
+  // console.log(optionsArray);
+  localStorage.setItem(key, JSON.stringify(optionsArray));
+}
 
 //Populates the empty div container with the result from the API call
 function presentRestaurants() {}
@@ -192,3 +212,5 @@ randomBtn.on("click", pickRandRestaurants);
 userPreferencesBtn.on("click", function () {
   render();
 });
+
+getPreferences();
