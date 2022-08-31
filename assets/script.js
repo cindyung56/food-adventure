@@ -9,12 +9,11 @@ var latitude;
 var longitude;
 var randRestaurants;
 
-var questionairreArray = [
-  {
-    question: "Are you allergic to anything? Click all that apply.",
-    options: ["peanuts", "tree nuts", "sesame", "eggs", "milk", "fish", "soybeans", "shellfish", "wheat", ""]
-  }
-]
+var dietaryAllergies;
+var dietaryPreferences;
+var ethnicPreferences;
+var currentBudget;
+
 
 //Prompt the user to get their location data or have them enter address/zip code
 function getUserLocation(event) {
@@ -82,8 +81,11 @@ function pickRandRestaurants(event) {
 //Get the preferences from local storage and store them in the global variables
 function getPreferences() {
   // console.log("This button works!");
-
-  
+  var modalQuestion = $('#modalQuestion');
+  var questionaireForm = $('#questionairreForm');
+  // for (var i = 0; i < questionairreArray.length, i++){
+    
+  // }
 }
 
 //Store the user preferences (allergies, location, cost)
