@@ -19,7 +19,7 @@ function getUserLocation(event) {
     }
     console.log(userAddressInput.val());
     
-
+    
     zipCodeApiUrl = zipCodeApiUrl + userAddressInput.val() + '&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081';
 
     fetch(zipCodeApiUrl)
