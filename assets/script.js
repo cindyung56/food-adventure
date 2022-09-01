@@ -1,3 +1,5 @@
+
+//shows empty div container with results from API call
 //Define user preference variables
 var userPreferencesBtn = $("#prefBtn");
 var testUrl =
@@ -199,8 +201,14 @@ function storePreferences(key, values) {
 //Populates the empty div container with the result from the API call
 function presentRestaurants() {}
 
+//.........................
 //Clear the div container
-function clearContainer() {}
+function clearContainer() {
+    resultEl.classList.add("hide")
+    nextEl.classList.remove("hide");
+    restaurantNewPage()
+}
+//.......................................
 
 //If they click on the restaurant, save the restaurant data in the URL and go to new page where more information is shown and mapping can be done
 function restaurantNewPage() {}

@@ -1,0 +1,27 @@
+header {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+section {
+    background-color: rgb(177, 218, 204);
+    height: 200px;
+    margin: 15px;
+}
+
+address {
+    justify-content: start;
+    background-color: bisque;
+    margin: 20px;
+}
+
+/* reviews {
+    margin: px;
+    color: rgb(7, 165, 113);
+    height: 200px;
+} */
+
+.btn {
+    justify-content: center;
+}
