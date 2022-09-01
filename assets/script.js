@@ -1,4 +1,3 @@
-
 //shows empty div container with results from API call
 //Define user preference variables
 var userPreferencesBtn = $("#prefBtn");
@@ -8,9 +7,9 @@ var userAddressInput = $("#address-input");
 var userAddressInputBtn = $("#address-btn");
 var randomBtn = $("#randomizeBtn");
 
-var preferencesDivEl = $('#preferences-content');
+var preferencesDivEl = $("#preferences-content");
 
-var restContainer = $('.container');
+var restContainer = $(".container");
 
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
@@ -25,20 +24,21 @@ var dietaryRestrictions;
 var ethnicPreferences;
 var budgetPreference;
 
-
-
 //Prompt the user to get their location data or have them enter address/zip code
 function getUserLocation(event) {
   event.preventDefault();
-  var zipCodeApiUrl = 'https://thezipcodes.com/api/v1/search?zipCode='
-  if(isNaN(userAddressInput.val()) || userAddressInput.val().length > 5) {/*TODO add display to say they must enter a number*/
-    console.log('NOT A NUMBER');
+  var zipCodeApiUrl = "https://thezipcodes.com/api/v1/search?zipCode=";
+  if (isNaN(userAddressInput.val()) || userAddressInput.val().length > 5) {
+    /*TODO add display to say they must enter a number*/
+    console.log("NOT A NUMBER");
     return 0;
   }
   console.log(userAddressInput.val());
-    
-    
-  zipCodeApiUrl = zipCodeApiUrl + userAddressInput.val() + '&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081';
+
+  zipCodeApiUrl =
+    zipCodeApiUrl +
+    userAddressInput.val() +
+    "&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081";
 
   fetch(zipCodeApiUrl)
     .then((response) => response.json())
@@ -84,7 +84,7 @@ function pickRandRestaurants(event) {
           return 0;
         }
       }
-      
+
       presentRestaurants();
     })
     .catch((error) => {
@@ -107,29 +107,27 @@ var questions = [
       "Soybeans",
       "None",
     ],
-    keyValue: "allergies"
+    keyValue: "allergies",
   },
 
   {
     question: "Do you have any dietary preferences/restrictions?",
     choices: ["Vegetarian", "Vegan", "Keto", "Kosher", "Gluten-Free", "None"],
-    keyValue: "preferences"
+    keyValue: "preferences",
   },
 
   {
     question: "Which food ethnicities do you prefer?",
     choices: ["American", "Asian", "Italian", "Mexican", "None"],
-    keyValue: "ethnicities"
+    keyValue: "ethnicities",
   },
 
   {
     question: "How much are you willing to spend?",
     choices: ["$0-30", "$30-50", "$50-100", "$100+"],
-    keyValue: "cost"
-  }
+    keyValue: "cost",
+  },
 ];
-
-
 
 // Display questionnaire questions and preferences
 function render() {
@@ -142,50 +140,49 @@ function render() {
   var currentKey = questions[questionIndex].keyValue;
   preferencesDivEl.text(userQuestion);
 
-
   // forEach function creates a list element for each preference option
   userChoices.forEach(function (newItem) {
     // console.log(newItem);
     var listItem = $("<input>");
     // console.log(listItem);
     listItem.attr({
-      "type": "checkbox",
-      "value": newItem
-    })
+      type: "checkbox",
+      value: newItem,
+    });
     var listItemLabel = $("<label>");
     listItemLabel.text(newItem);
-    
+
     $(formCreate).append(listItem);
     $(formCreate).append(listItemLabel);
     $(formCreate).append($("<br>"));
-
   });
 
   $(preferencesDivEl).append(formCreate);
   var nextBtn = $("<input>");
-  nextBtn.attr({"type": "submit", "id": "questionairre-submit", "class": "bg-primary text-white"});
+  nextBtn.attr({
+    type: "submit",
+    id: "questionnaire-submit",
+  });
   $(formCreate).append(nextBtn);
 
   // TODO: Create response to log preferences to local storage and also take to next question
-  questionairreSubmitBtn = $('#questionairre-submit');
-  questionairreSubmitBtn.on('click', function(event){
+  questionnaireSubmitBtn = $("#questionnaire-submit");
+  questionnaireSubmitBtn.on("click", function (event) {
     event.preventDefault();
-    var checkedInputs = $('input:checked');
+    var checkedInputs = $("input:checked");
     // console.log(checkedInputs);
-    
+
     storePreferences(currentKey, checkedInputs);
     questionIndex++;
-    if (questionIndex === questions.length){
+    if (questionIndex === questions.length) {
       // TODO: go to next function to display results
       console.log("last question has been answered");
       $(preferencesDivEl).empty();
       content.dataset.state = "visible";
-    } else{
+    } else {
       render();
     }
-    
   });
-
 }
 
 //Get the preferences from local storage and store them in the global variables
@@ -200,8 +197,8 @@ function getPreferences() {
 function storePreferences(key, values) {
   var optionsArray = [];
   $.each(values, function () {
-      optionsArray.push($(this).val());
-    });
+    optionsArray.push($(this).val());
+  });
   // console.log(optionsArray);
   localStorage.setItem(key, JSON.stringify(optionsArray));
 }
@@ -209,18 +206,18 @@ function storePreferences(key, values) {
 //Populates the empty div container with the result from the API call
 function presentRestaurants() {
   for (var i = 0; i < randRestaurants.length; i++) {
-    restContainer.append($('<h1>').text(randRestaurants[i].name));
-    restContainer.append($('<p>').text(randRestaurants[i].rating));
-    restContainer.append($('<img>').attr('src', randRestaurants[i].image_url));
+    restContainer.append($("<h1>").text(randRestaurants[i].name));
+    restContainer.append($("<p>").text(randRestaurants[i].rating));
+    restContainer.append($("<img>").attr("src", randRestaurants[i].image_url));
   }
 }
 
 //.........................
 //Clear the div container
 function clearContainer() {
-    resultEl.classList.add("hide")
-    nextEl.classList.remove("hide");
-    restaurantNewPage()
+  resultEl.classList.add("hide");
+  nextEl.classList.remove("hide");
+  restaurantNewPage();
 }
 //.......................................
 
