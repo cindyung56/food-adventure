@@ -64,3 +64,11 @@ label {
   margin: 7px;
   padding: 12px;
 }
+
+*[data-state="hidden"]{
+  display: none;
+}
+
+*[data-state="visible"]{
+  display: block;
+}
