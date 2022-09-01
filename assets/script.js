@@ -7,6 +7,7 @@ var testUrl =
 var userAddressInput = $("#address-input");
 var userAddressInputBtn = $("#address-btn");
 var randomBtn = $("#randomizeBtn");
+var preferencesDivEl = $('#preferences-content');
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
 var latitude;
@@ -19,6 +20,7 @@ var dietaryAllergies;
 var dietaryRestrictions;
 var ethnicPreferences;
 var budgetPreference;
+
 
 
 //Prompt the user to get their location data or have them enter address/zip code
@@ -129,13 +131,13 @@ var questions = [
 // Display questionnaire questions and preferences
 function render() {
   // clears question data/elements
-  $(content).empty();
+  $(preferencesDivEl).empty();
   $(formCreate).empty();
 
   var userQuestion = questions[questionIndex].question;
   var userChoices = questions[questionIndex].choices;
   var currentKey = questions[questionIndex].keyValue;
-  content.textContent = userQuestion;
+  preferencesDivEl.text(userQuestion);
 
 
   // forEach function creates a list element for each preference option
@@ -156,7 +158,7 @@ function render() {
 
   });
 
-  $(content).append(formCreate);
+  $(preferencesDivEl).append(formCreate);
   var nextBtn = $("<input>");
   nextBtn.attr({"type": "submit", "id": "questionairre-submit", "class": "bg-primary text-white"});
   $(formCreate).append(nextBtn);
@@ -170,8 +172,11 @@ function render() {
     
     storePreferences(currentKey, checkedInputs);
     questionIndex++;
-    if (questionIndex === questionIndex.length - 1){
+    if (questionIndex === questions.length){
       // TODO: go to next function to display results
+      console.log("last question has been answered");
+      $(preferencesDivEl).empty();
+      content.dataset.state = "visible";
     } else{
       render();
     }
@@ -218,6 +223,9 @@ userAddressInputBtn.on("click", getUserLocation);
 randomBtn.on("click", pickRandRestaurants);
 // Takes user to questionIndex
 userPreferencesBtn.on("click", function () {
+  content.dataset.state = "hidden";
+  $(preferencesDivEl).data("state", "visible");
+  questionIndex = 0;
   render();
 });
 
