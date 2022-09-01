@@ -1,22 +1,22 @@
 * {
   font-family: "DM Sans", sans-serif, "Lucida Sans", "Lucida Sans Regular",
     "Lucida Grande", "Lucida Sans Unicode", Verdana;
+  background-color: var(--blue);
+  box-sizing: border-box;
 }
 
 :root {
-  --light-red: #e5383b;
-  --red: #ba181b;
-  --dark-red: #660708;
-  --grey: #d3d3d3;
-  --charcoal: #161a1d;
-  --light-grey: #f5f3f4;
+  --light-red: #ef233c;
+  --red: #d80032;
+  --grey: #edf2f4;
+  --light-blue: #8d99ae;
+  --blue: #2b2d42;
 }
 
 body {
-  margin: 40px;
-  padding: 17px;
-  background-color: var(--light-grey);
-  border-radius: 7px;
+  margin: 45px;
+  max-width: 100%;
+  background-color: var(--blue);
 }
 
 #landing {
@@ -25,13 +25,18 @@ body {
   text-align: center;
 }
 
-form {
-  padding: 17px;
+#address-input {
+  background-color: var(--grey);
+}
+
+#address-btn {
+  background-color: var(--grey);
+  border: none;
 }
 
 button {
   background-color: var(--light-red);
-  color: var(--light-grey);
+  color: var(--grey);
   border-radius: 25px;
   padding: 10px;
   margin: 10px;
@@ -42,10 +47,21 @@ button:hover {
   background-color: var(--red);
   color: white;
   transition-duration: 0.4s;
+  transform: scale(1.15);
+}
+
+form {
+  padding: 17px;
+  flex-direction: column;
+}
+
+#preferences-content {
+  font-size: 35px;
+  color: var(--grey);
 }
 
 #content {
-  border-color: var(--charcoal);
+  border-color: var(--blue);
 }
 
 #text {
@@ -53,15 +69,21 @@ button:hover {
 }
 
 h1 {
-  font-size: 50px;
+  font-weight: 1000;
+  font-size: 75px;
   padding: 20px;
   margin: 20px;
-  background-color: var(--light-red);
-  color: var(--light-grey);
+  color: var(--light-red);
 }
 
 p {
+  position: relative;
   font-size: 17px;
+  background-color: var(--red);
+  color: var(--grey);
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 input {
@@ -75,6 +97,13 @@ input:hover {
 label {
   margin: 7px;
   padding: 12px;
+  font-size: 24px;
+}
+
+#questionnaire-submit {
+  border: none;
+  color: var(--grey);
+  background-color: var(--light-red);
 }
 
 *[data-state="hidden"] {
