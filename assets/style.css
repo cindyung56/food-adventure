@@ -2,7 +2,6 @@
   font-family: "DM Sans", sans-serif, "Lucida Sans", "Lucida Sans Regular",
     "Lucida Grande", "Lucida Sans Unicode", Verdana;
   background-color: var(--blue);
-  box-sizing: border-box;
 }
 
 :root {
@@ -51,8 +50,7 @@ button:hover {
 }
 
 form {
-  padding: 17px;
-  flex-direction: column;
+  padding: 21px;
 }
 
 #preferences-content {
@@ -72,16 +70,15 @@ h1 {
   font-weight: 1000;
   font-size: 75px;
   padding: 20px;
-  margin: 20px;
+  margin: 20px 20px 10px 20px;
   color: var(--light-red);
 }
 
 p {
   position: relative;
-  font-size: 17px;
-  background-color: var(--red);
+  font-size: 25px;
   color: var(--grey);
-  margin: 10px;
+  margin: 0px 10px 20px 10px;
   padding: 10px;
   border-radius: 10px;
 }
@@ -95,15 +92,30 @@ input:hover {
 }
 
 label {
+  display: inline-block;
   margin: 7px;
   padding: 12px;
   font-size: 24px;
+  color: var(--grey);
+  text-align: center;
+  width: 20%;
+  position: relative;
 }
 
 #questionnaire-submit {
   border: none;
   color: var(--grey);
   background-color: var(--light-red);
+  border-radius: 10px;
+  margin: 30px;
+  padding: 7px;
+}
+
+#questionnaire-submit:hover {
+  transition-duration: 0.4s;
+  transform: scale(1.1);
+  color: white;
+  background-color: var(--red);
 }
 
 *[data-state="hidden"] {
