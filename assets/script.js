@@ -7,7 +7,11 @@ var testUrl =
 var userAddressInput = $("#address-input");
 var userAddressInputBtn = $("#address-btn");
 var randomBtn = $("#randomizeBtn");
+
 var preferencesDivEl = $('#preferences-content');
+
+var restContainer = $('.container');
+
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
 var latitude;
@@ -26,18 +30,15 @@ var budgetPreference;
 //Prompt the user to get their location data or have them enter address/zip code
 function getUserLocation(event) {
   event.preventDefault();
-  var zipCodeApiUrl = "https://thezipcodes.com/api/v1/search?zipCode=";
-  if (isNaN(userAddressInput.val()) || userAddressInput.val().length > 5) {
-    /*TODO add display to say they must enter a number*/
-    console.log("NOT A NUMBER");
+  var zipCodeApiUrl = 'https://thezipcodes.com/api/v1/search?zipCode='
+  if(isNaN(userAddressInput.val()) || userAddressInput.val().length > 5) {/*TODO add display to say they must enter a number*/
+    console.log('NOT A NUMBER');
     return 0;
   }
   console.log(userAddressInput.val());
-
-  zipCodeApiUrl =
-    zipCodeApiUrl +
-    userAddressInput.val() +
-    "&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081";
+    
+    
+  zipCodeApiUrl = zipCodeApiUrl + userAddressInput.val() + '&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081';
 
   fetch(zipCodeApiUrl)
     .then((response) => response.json())
@@ -83,6 +84,8 @@ function pickRandRestaurants(event) {
           return 0;
         }
       }
+      
+      presentRestaurants();
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -204,7 +207,13 @@ function storePreferences(key, values) {
 }
 
 //Populates the empty div container with the result from the API call
-function presentRestaurants() {}
+function presentRestaurants() {
+  for (var i = 0; i < randRestaurants.length; i++) {
+    restContainer.append($('<h1>').text(randRestaurants[i].name));
+    restContainer.append($('<p>').text(randRestaurants[i].rating));
+    restContainer.append($('<img>').attr('src', randRestaurants[i].image_url));
+  }
+}
 
 //.........................
 //Clear the div container
