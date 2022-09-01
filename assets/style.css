@@ -4,11 +4,19 @@
 }
 
 :root {
-  --red: var (#ba181b);
-  --dark-red: var (#660708);
-  --grey: var (#d3d3d3);
-  --charcoal: var (#161a1d);
-  --light-grey: var (#f5f3f4);
+  --light-red: #e5383b;
+  --red: #ba181b;
+  --dark-red: #660708;
+  --grey: #d3d3d3;
+  --charcoal: #161a1d;
+  --light-grey: #f5f3f4;
+}
+
+body {
+  margin: 40px;
+  padding: 17px;
+  background-color: var(--light-grey);
+  border-radius: 7px;
 }
 
 #landing {
@@ -22,10 +30,18 @@ form {
 }
 
 button {
-  background-color: var(--red);
+  background-color: var(--light-red);
+  color: var(--light-grey);
   border-radius: 25px;
   padding: 10px;
   margin: 10px;
+  border: none;
+}
+
+button:hover {
+  background-color: var(--red);
+  color: white;
+  transition-duration: 0.4s;
 }
 
 #content {
@@ -40,16 +56,12 @@ h1 {
   font-size: 50px;
   padding: 20px;
   margin: 20px;
+  background-color: var(--light-red);
+  color: var(--light-grey);
 }
 
 p {
   font-size: 17px;
-}
-
-button:hover {
-  background-color: red;
-  color: white;
-  transition-duration: 0.4s;
 }
 
 input {
@@ -65,10 +77,10 @@ label {
   padding: 12px;
 }
 
-*[data-state="hidden"]{
+*[data-state="hidden"] {
   display: none;
 }
 
-*[data-state="visible"]{
+*[data-state="visible"] {
   display: block;
 }
