@@ -7,6 +7,7 @@ var testUrl =
 var userAddressInput = $("#address-input");
 var userAddressInputBtn = $("#address-btn");
 var randomBtn = $("#randomizeBtn");
+var restContainer = $('.container');
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
 var latitude;
@@ -78,6 +79,8 @@ function pickRandRestaurants(event) {
           return 0;
         }
       }
+      
+      presentRestaurants();
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -196,7 +199,13 @@ function storePreferences(key, values) {
 }
 
 //Populates the empty div container with the result from the API call
-function presentRestaurants() {}
+function presentRestaurants() {
+  for (var i = 0; i < randRestaurants.length; i++) {
+    restContainer.append($('<h1>').text(randRestaurants[i].name));
+    restContainer.append($('<p>').text(randRestaurants[i].rating));
+    restContainer.append($('<img>').attr('src', randRestaurants[i].image_url));
+  }
+}
 
 //.........................
 //Clear the div container
