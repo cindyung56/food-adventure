@@ -14,26 +14,36 @@
     <header>
         <h1>Restaurant</h1>
     </header>
-    <section class=""> 
-        <div class="row">
-            <h2>hhgggghggg</h2>
-            <div class="resturant col-sm-6 col-md-8"> Restaurant IMAGE .col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.
-            </div>
-            <div class="map col-6 col-md-4">MAPS  .col-6<br>Subsequent columns continue along the new line.
-            </div>
+    
+        <div class="row">   
+            <div class="resturant col-sm-6 col-md-7"> Restaurant IMAGE .</div>
+            <div class="map col-6 col-md-5" id="map" ></div>
         </div>
-    </section>
+    
 
-    <button class="btn m-1 btn-primary" type="submit">Directions</button>
+        <div class="contact">
+            <a class="call" href="##">Call</a>
+            <button class="btn m-1 btn-primary " type="submit">Directions</button>
+        </div>
 
     
+
     <footer>
-        <div class="reviews card shadow-lg" style="height: 200px">
-            <div class="card-body">
+        <div class="reviews container shadow-lg" style="height: 235px">
               This is some text within a card body. dfghjhgvfcdfghjnbvftgyujhbvfctgyh
-            </div>
           </div>
     </footer>
+
+    <div id="map"></div>
+    <!-- <script>
+        function initMap(){
+
+        }
+    </script> -->
+
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsViacmsA-t9U8sxxNZ91RF2lzxD7THUg&libraries=places&callback=initMap">
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script src="./assets/lastscript.js"></script>
