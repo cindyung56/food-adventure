@@ -1,19 +1,24 @@
 header {
     display: flex;
     justify-content: center;
-    margin: 20px;
+    margin: 10px;
 }
 
-section {
-    background-color: rgb(177, 218, 204);
+.go {
+    margin: 10px;
+}
+
+.resturant {
     height: 200px;
-    margin: 15px;
+    width: 500px;
+    background-color: rgb(150, 101, 40);
 }
 
-address {
-    justify-content: start;
+#map {
     background-color: bisque;
-    margin: 20px;
+    justify-content: center;
+    height: 200px;
+    width: 300px;
 }
 
 /* reviews {
@@ -22,6 +27,6 @@ address {
     height: 200px;
 } */
 
-.btn {
-    justify-content: center;
+.container {
+    justify-content: space-between;
 }

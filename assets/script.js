@@ -233,17 +233,24 @@ function presentRestaurants() {
   }
 }
 
-//.........................
 //Clear the div container
 function clearContainer() {
-  resultEl.classList.add("hide");
-  nextEl.classList.remove("hide");
-  restaurantNewPage();
+    restContainer.classList.add("hide")
+    nextEl.classList.remove("hide");
+    restaurantNewPage()
 }
-//.......................................
 
 //If they click on the restaurant, save the restaurant data in the URL and go to new page where more information is shown and mapping can be done
-function restaurantNewPage() {}
+function restaurantNewPage() {
+
+  var queryString = './search-results.html?q=' + searchInputVal + '&format=' + formatInputVal;
+
+  location.assign(queryString);
+}
+
+//randRestaurants.addEventListener('click', handleSearchFormSubmit);
+
+
 
 //Event listeners
 userAddressInputBtn.on("click", getUserLocation);
