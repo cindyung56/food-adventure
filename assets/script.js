@@ -203,9 +203,11 @@ function storePreferences(key, values) {
 //Populates the empty div container with the result from the API call
 function presentRestaurants() {
   for (var i = 0; i < randRestaurants.length; i++) {
-    restContainer.append($('<h1>').text(randRestaurants[i].name));
-    restContainer.append($('<p>').text(randRestaurants[i].rating));
-    restContainer.append($('<img>').attr('src', randRestaurants[i].image_url));
+    var restCard = $('<div>').addClass('rest-card');
+    restCard.append($("<h1>").text(randRestaurants[i].name));
+    restCard.append($("<p>").text(randRestaurants[i].rating));
+    restCard.append($("<img>").attr("src", randRestaurants[i].image_url));
+    restContainer.append(restCard);
   }
 }
 
