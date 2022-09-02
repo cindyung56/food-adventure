@@ -11,6 +11,7 @@ var directionsDisplay;
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
 var destinationData;
+// destinationData.display_phone
 
 //displays the imagelink and phone number of choosen resturant in previos page
 function restaurantSelected(restaurantID) {
@@ -29,7 +30,7 @@ function restaurantSelected(restaurantID) {
     .then(function(data){
         // console.log(data);
         destinationData = data;
-        console.log(destinationData);
+        console.log(destinationData.display_phone);
     })
 }
 
