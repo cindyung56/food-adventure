@@ -1,18 +1,18 @@
-var rowEl = document.querySelector("row")
 var resturantEl = document.querySelector("resturant")
 var btnEl = document.querySelector("btn")
 var reviewsEl = document.querySelector("reviews")
 var view;
-
+var testUrl = "https://www.google.com/maps/dir/";; 
 var directionsService;
 var directionsDisplay;
 
 //displays the imagelink and phone number of choosen resturant in previos page
 function restaurantSelected() {
+
     
 }
 
-//Adds marker
+//Adds and positions the marker
 function addMaker(location, map) {
     console.log(location)
     let destination = new google.maps.LatLng(location.lat,location.lng)
@@ -49,8 +49,6 @@ function initMap(pos, lat, lng){
         destination: {lat:34.052235,  lng:-118.243683},
         optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING,
-        
-
     };
 
     directionsService
@@ -58,9 +56,8 @@ function initMap(pos, lat, lng){
     .then((response)=>{
 
         directionsDisplay.setDirections(response);
-})
-
-    }
+    })
+}
 
 //pin points the users location 
 function mylocation() {
@@ -68,16 +65,13 @@ function mylocation() {
     //view.innerHTML = {lat:position.coords.latitude, lng:position.coords.longitude}
     var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     initMap(pos, position.coords.latitude, position.coords.longitude);
-    
     });
 }
 
-
-    
-
 //button when clicked redirects you to google maps
 function directions() {
-
+    testUrl 
+     
 }
 
 //container displaying reviews about the resturant from yelp or google reviews.
@@ -90,4 +84,4 @@ $(document).ready(function(){
 
 
 // ADDEVENTLISTENERS
-//btnEl.addEventListener("click", getLocation)
+btnEl.addEventListener("click", getLocation)
