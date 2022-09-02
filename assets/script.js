@@ -17,6 +17,7 @@ var latitude;
 var longitude;
 var randRestaurants;
 var questionIndex = 0;
+var formCreate = $("<form>");
 
 var dietaryAllergies;
 var dietaryRestrictions;
