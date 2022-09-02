@@ -96,6 +96,7 @@ function pickRandRestaurants(event) {
       console.log("Success YELP:", data);
       for (var i = 0; i < data.businesses.length; i++) {
         if (!data.businesses[i].is_closed && randRestaurants.length < 3) {
+          console(data.businesses[i].url)
           randRestaurants.push(data.businesses[i]);
         }
         if (randRestaurants < 3) {
