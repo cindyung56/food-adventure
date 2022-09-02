@@ -12,7 +12,17 @@ var restContainer = $(".container");
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
 
-var searchTerms = ['Sandwich', 'Burger', 'Thai', 'Mexican', 'Pho', 'American', 'Sushi', 'Italian', 'Indian'];
+var searchTerms = [
+  "Sandwich",
+  "Burger",
+  "Thai",
+  "Mexican",
+  "Pho",
+  "American",
+  "Sushi",
+  "Italian",
+  "Indian",
+];
 var latitude;
 var longitude;
 var randRestaurants;
@@ -25,10 +35,10 @@ var ethnicPreferences;
 var budgetPreference;
 
 // Get the user's zip code from localStorage if previously stored
-function getLocalZipCode(){
+function getLocalZipCode() {
   var zipCode = localStorage.getItem("zip-code");
-  if (zipCode !== null){
-    console.log("there is a saved zip code in localStorage")
+  if (zipCode !== null) {
+    console.log("there is a saved zip code in localStorage");
     userAddressInput.prop("placeholder", zipCode);
     fetchYelpApiUrl(zipCode);
   }
@@ -47,9 +57,9 @@ function getUserLocation(event) {
   fetchYelpApiUrl(userAddressInput.val());
 }
 
-function fetchYelpApiUrl(userZipCode){
-    var zipCodeApiUrl = "https://thezipcodes.com/api/v1/search?zipCode=";
-    zipCodeApiUrl =
+function fetchYelpApiUrl(userZipCode) {
+  var zipCodeApiUrl = "https://thezipcodes.com/api/v1/search?zipCode=";
+  zipCodeApiUrl =
     zipCodeApiUrl +
     userZipCode +
     "&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081";
@@ -63,9 +73,9 @@ function fetchYelpApiUrl(userZipCode){
       latitude = data.location[0].latitude;
       longitude = data.location[0].longitude;
       console.log(latitude + "\n" + longitude);
-
+      localStorage.setItem("latitude", latitude);
+      localStorage.setItem("longitude", longitude);
       localStorage.setItem("zip-code", userZipCode);
-
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -78,7 +88,9 @@ function fetchYelpApiUrl(userZipCode){
 function pickRandRestaurants(event) {
   event.preventDefault();
   var yelpApiUrl =
-    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + searchTerms[Math.floor(Math.random()*searchTerms.length)] + "&latitude=";
+    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" +
+    searchTerms[Math.floor(Math.random() * searchTerms.length)] +
+    "&latitude=";
   //have a list of search terms and randomize them
 
   yelpApiUrl = yelpApiUrl + latitude + "&longitude=" + longitude;
@@ -113,37 +125,37 @@ function pickRandRestaurants(event) {
 
 // User Preferences Questionaire
 var questions = [
-  {
-    question: "Do you have any allergies?",
-    choices: [
-      "Milk",
-      "Tree nuts",
-      "Eggs",
-      "Peanuts",
-      "Fish",
-      "Wheat",
-      "Shellfish",
-      "Soybeans",
-      "None",
-    ],
-    keyValue: "allergies",
-  },
+  // {
+  //   question: "Do you have any allergies?",
+  //   choices: [
+  //     "Milk",
+  //     "Tree nuts",
+  //     "Eggs",
+  //     "Peanuts",
+  //     "Fish",
+  //     "Wheat",
+  //     "Shellfish",
+  //     "Soybeans",
+  //     "None",
+  //   ],
+  //   keyValue: "allergies",
+  // },
 
   {
     question: "Do you have any dietary preferences/restrictions?",
-    choices: ["Vegetarian", "Vegan", "Keto", "Kosher", "Gluten-Free", "None"],
+    choices: ["Vegetarian", "Vegan", "Keto", "Kosher", "Gluten-Free"],
     keyValue: "preferences",
   },
 
   {
     question: "Which food ethnicities do you prefer?",
-    choices: ["American", "Asian", "Italian", "Mexican", "None"],
+    choices: ["American", "Asian", "Italian", "Mexican"],
     keyValue: "ethnicities",
   },
 
   {
     question: "How much are you willing to spend?",
-    choices: ["$0-30", "$30-50", "$50-100", "$100+"],
+    choices: ["$", "$$", "$$$", "$$$$"],
     keyValue: "cost",
   },
 ];
@@ -198,10 +210,30 @@ function render() {
       console.log("last question has been answered");
       $(preferencesDivEl).empty();
       content.dataset.state = "visible";
+      displayResults();
+      console.log(displayResults);
     } else {
       render();
     }
   });
+}
+
+function displayResults() {
+  fetchYelpApiUrl();
+  var ethnicities = localStorage.key("ethnicities");
+  var yelpApiCurate =
+    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?category=restaurants" +
+    "&" +
+    latitude +
+    "&" +
+    longitude +
+    // preferences + "&" +
+    "&" +
+    ethnicities +
+    "&limit=3" +
+    "&price=" +
+    "&open_now";
+  console.log(yelpApiCurate);
 }
 
 //Get the preferences from local storage and store them in the global variables
@@ -225,7 +257,7 @@ function storePreferences(key, values) {
 //Populates the empty div container with the result from the API call
 function presentRestaurants() {
   for (var i = 0; i < randRestaurants.length; i++) {
-    var restCard = $('<div>').addClass('rest-card');
+    var restCard = $("<div>").addClass("rest-card");
     restCard.append($("<h1>").text(randRestaurants[i].name));
     restCard.append($("<p>").text(randRestaurants[i].rating));
     restCard.append($("<img>").attr("src", randRestaurants[i].image_url));
@@ -235,22 +267,20 @@ function presentRestaurants() {
 
 //Clear the div container
 function clearContainer() {
-    restContainer.classList.add("hide")
-    nextEl.classList.remove("hide");
-    restaurantNewPage()
+  restContainer.classList.add("hide");
+  nextEl.classList.remove("hide");
+  restaurantNewPage();
 }
 
 //If they click on the restaurant, save the restaurant data in the URL and go to new page where more information is shown and mapping can be done
 function restaurantNewPage() {
-
-  var queryString = './search-results.html?q=' + searchInputVal + '&format=' + formatInputVal;
+  var queryString =
+    "./search-results.html?q=" + searchInputVal + "&format=" + formatInputVal;
 
   location.assign(queryString);
 }
 
 //randRestaurants.addEventListener('click', handleSearchFormSubmit);
-
-
 
 //Event listeners
 userAddressInputBtn.on("click", getUserLocation);
