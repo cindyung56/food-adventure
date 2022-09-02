@@ -1,7 +1,7 @@
 * {
   font-family: "DM Sans", sans-serif, "Lucida Sans", "Lucida Sans Regular",
     "Lucida Grande", "Lucida Sans Unicode", Verdana;
-  background-color: var(--blue);
+  /* background-color: var(--blue); */
 }
 
 :root {
@@ -15,10 +15,14 @@
 body {
   margin: 45px;
   max-width: 100%;
-  background-color: var(--blue);
+  background-color: white;
 }
 
-button {
+header p {
+  color: #fb3c43;
+}
+
+/* button {
   background-color: var(--light-red);
   color: var(--grey);
   border-radius: 25px;
@@ -32,7 +36,7 @@ button:hover {
   color: white;
   transition-duration: 0.4s;
   transform: scale(1.15);
-}
+} */
 
 form {
   padding: 21px;
@@ -43,21 +47,21 @@ h1 {
   font-size: 75px;
   padding: 20px;
   margin: 20px 20px 10px 20px;
-  color: var(--light-red);
+  color: black;
 }
 
 p {
   position: relative;
   font-size: 25px;
-  color: var(--grey);
+  color: black;
   margin: 0px 10px 20px 10px;
   padding: 10px;
   border-radius: 10px;
 }
 
-input {
+/* input {
   margin: 7px 0px;
-}
+} */
 
 input:hover {
   cursor: pointer;
@@ -90,6 +94,9 @@ label {
 .card-head {
 
 } */
+.form-control {
+  width: 25%;
+}
 
 #landing {
   margin: 40px;
@@ -97,14 +104,14 @@ label {
   text-align: center;
 }
 
-#address-input {
+/* #address-input {
   background-color: var(--grey);
-}
+} */
 
-#address-btn {
+/* #address-btn {
   background-color: var(--grey);
   border: none;
-}
+} */
 
 #preferences-content {
   font-size: 35px;
