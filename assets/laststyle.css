@@ -4,20 +4,21 @@ header {
     margin: 10px;
 }
 
-/* section {
-    background-color: rgb(178, 221, 208);
-    height: 200px;
+.go {
     margin: 10px;
-} */
+}
 
 .resturant {
     height: 200px;
+    width: 500px;
     background-color: rgb(150, 101, 40);
 }
 
-.map {
+#map {
     background-color: bisque;
-    justify-content: end;
+    justify-content: center;
+    height: 200px;
+    width: 300px;
 }
 
 /* reviews {
