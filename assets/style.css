@@ -18,21 +18,6 @@ body {
   background-color: var(--blue);
 }
 
-#landing {
-  margin: 40px;
-  padding: 25px;
-  text-align: center;
-}
-
-#address-input {
-  background-color: var(--grey);
-}
-
-#address-btn {
-  background-color: var(--grey);
-  border: none;
-}
-
 button {
   background-color: var(--light-red);
   color: var(--grey);
@@ -51,19 +36,6 @@ button:hover {
 
 form {
   padding: 21px;
-}
-
-#preferences-content {
-  font-size: 35px;
-  color: var(--grey);
-}
-
-#content {
-  border-color: var(--blue);
-}
-
-#text {
-  margin: 20px;
 }
 
 h1 {
@@ -100,6 +72,51 @@ label {
   text-align: center;
   width: 20%;
   position: relative;
+}
+
+/* .rest-card {
+  border: 1px solid black;
+  border-radius: 10px;
+  background: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.rest-card img {
+  max-width: fit-content;
+  max-height: fit-content;
+}
+
+.card-head {
+
+} */
+
+#landing {
+  margin: 40px;
+  padding: 25px;
+  text-align: center;
+}
+
+#address-input {
+  background-color: var(--grey);
+}
+
+#address-btn {
+  background-color: var(--grey);
+  border: none;
+}
+
+#preferences-content {
+  font-size: 35px;
+  color: var(--grey);
+}
+
+#content {
+  border-color: var(--blue);
+}
+
+#text {
+  margin: 20px;
 }
 
 #questionnaire-submit {

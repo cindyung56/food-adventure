@@ -203,13 +203,33 @@ function storePreferences(key, values) {
 }
 
 //Populates the empty div container with the result from the API call
+// function presentRestaurants() {
+//   for (var i = 0; i < randRestaurants.length; i++) {
+//     var restCard = $('<div>').addClass('rest-card').addClass('card').addClass('text-bg-dark');
+//     var cardHead = $('<div>').addClass('card-head').addClass('card-img-overlay');
+//     restCard.append($("<img>").attr("src", randRestaurants[i].image_url).addClass('card-img'));
+//     cardHead.append($("<h1>").text(randRestaurants[i].name).addClass('card-title'));
+//     cardHead.append($("<p>").text(randRestaurants[i].rating).addClass('card-text'));
+//     restCard.append(cardHead);
+//     restContainer.append(restCard);
+//   }
+// }
+
 function presentRestaurants() {
   for (var i = 0; i < randRestaurants.length; i++) {
-    var restCard = $('<div>').addClass('rest-card');
-    restCard.append($("<h1>").text(randRestaurants[i].name));
-    restCard.append($("<p>").text(randRestaurants[i].rating));
-    restCard.append($("<img>").attr("src", randRestaurants[i].image_url));
-    restContainer.append(restCard);
+    var externalDiv = $('<div>').addClass('card mb-3');
+    var rowDiv = $('<div>').addClass('row g-0');
+    var textColumn = $('<div>').addClass('col-md-8');
+    var imgColumn = $('<div>').addClass('col-md-4');
+    var cardBody = $('<div>').addClass('card-body');
+    cardBody.append($("<h1>").text(randRestaurants[i].name).addClass('card-title'));
+    cardBody.append($("<h1>").text(randRestaurants[i].rating).addClass('card-text'));
+    imgColumn.append($("<img>").attr("src", randRestaurants[i].image_url).addClass('card-img'));
+    textColumn.append(cardBody);
+    rowDiv.append(textColumn);
+    rowDiv.append(imgColumn);
+    externalDiv.append(rowDiv);
+    restContainer.append(externalDiv);
   }
 }
 
