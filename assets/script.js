@@ -1,20 +1,22 @@
-
 //shows empty div container with results from API call
 //Define user preference variables
 var userPreferencesBtn = $("#prefBtn");
-var testUrl =
-  "https://thezipcodes.com/api/v1/search?zipCode=13040&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081";
 var userAddressInput = $("#address-input");
 var userAddressInputBtn = $("#address-btn");
 var randomBtn = $("#randomizeBtn");
 var restContainer = $('.container');
+var formCreate = $("<form>");
+
+var testUrl =
+  "https://thezipcodes.com/api/v1/search?zipCode=13040&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081";
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
+
+var searchTerms = ['Sandwich', 'Burger', 'Thai', 'Mexican', 'Pho', 'American', 'Sushi', 'Italian', 'Indian'];
 var latitude;
 var longitude;
 var randRestaurants;
 var questionIndex = 0;
-var formCreate = $("<form>");
 
 var dietaryAllergies;
 var dietaryRestrictions;
@@ -54,7 +56,7 @@ function getUserLocation(event) {
 function pickRandRestaurants(event) {
   event.preventDefault();
   var yelpApiUrl =
-    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=delis&latitude=";
+    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + searchTerms[Math.floor(Math.random()*searchTerms.length)] + "&latitude=";
   //have a list of search terms and randomize them
 
   yelpApiUrl = yelpApiUrl + latitude + "&longitude=" + longitude;
