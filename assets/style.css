@@ -4,6 +4,14 @@
   background-color: var(--blue);
 }
 
+*[data-state="hidden"] {
+  display: none;
+}
+
+*[data-state="visible"] {
+  display: block;
+}
+
 :root {
   --light-red: #ef233c;
   --red: #d80032;
@@ -42,11 +50,15 @@ button {
   border: none;
 }
 
-button:hover {
+button:not(:disabled):hover {
   background-color: var(--red);
   color: white;
   transition-duration: 0.4s;
   transform: scale(1.15);
+}
+
+button[disabled]{
+  background-color: gray;
 }
 
 form {
@@ -118,10 +130,4 @@ label {
   background-color: var(--red);
 }
 
-*[data-state="hidden"] {
-  display: none;
-}
 
-*[data-state="visible"] {
-  display: block;
-}

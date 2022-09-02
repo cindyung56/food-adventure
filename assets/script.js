@@ -24,10 +24,19 @@ var dietaryRestrictions;
 var ethnicPreferences;
 var budgetPreference;
 
+// Get the user's zip code from localStorage if previously stored
+function getLocalZipCode(){
+  var zipCode = localStorage.getItem("zip-code");
+  if (zipCode !== null){
+    console.log("there is a saved zip code in localStorage")
+    userAddressInput.prop("placeholder", zipCode);
+    fetchYelpApiUrl(zipCode);
+  }
+}
+
 //Prompt the user to get their location data or have them enter address/zip code
 function getUserLocation(event) {
   event.preventDefault();
-  var zipCodeApiUrl = "https://thezipcodes.com/api/v1/search?zipCode=";
   if (isNaN(userAddressInput.val()) || userAddressInput.val().length > 5) {
     /*TODO add display to say they must enter a number*/
     console.log("NOT A NUMBER");
@@ -35,18 +44,28 @@ function getUserLocation(event) {
   }
   console.log(userAddressInput.val());
 
-  zipCodeApiUrl =
+  fetchYelpApiUrl(userAddressInput.val());
+}
+
+function fetchYelpApiUrl(userZipCode){
+    var zipCodeApiUrl = "https://thezipcodes.com/api/v1/search?zipCode=";
+    zipCodeApiUrl =
     zipCodeApiUrl +
-    userAddressInput.val() +
+    userZipCode +
     "&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081";
 
   fetch(zipCodeApiUrl)
     .then((response) => response.json())
     .then((data) => {
       console.log("Success ZIP:", data);
+      $(randomBtn).prop("disabled", false);
+      $(userPreferencesBtn).prop("disabled", false);
       latitude = data.location[0].latitude;
       longitude = data.location[0].longitude;
       console.log(latitude + "\n" + longitude);
+
+      localStorage.setItem("zip-code", userZipCode);
+
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -237,4 +256,5 @@ userPreferencesBtn.on("click", function () {
   render();
 });
 
+getLocalZipCode();
 getPreferences();
