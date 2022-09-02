@@ -1,6 +1,21 @@
 * {
-  font-family: sans-serif, "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Verdana;
+  font-family: "DM Sans", sans-serif, "Lucida Sans", "Lucida Sans Regular",
+    "Lucida Grande", "Lucida Sans Unicode", Verdana;
+  background-color: var(--blue);
+}
+
+:root {
+  --light-red: #ef233c;
+  --red: #d80032;
+  --grey: #edf2f4;
+  --light-blue: #8d99ae;
+  --blue: #2b2d42;
+}
+
+body {
+  margin: 45px;
+  max-width: 100%;
+  background-color: var(--blue);
 }
 
 #landing {
@@ -9,6 +24,104 @@
   text-align: center;
 }
 
-#header {
-  font-size: 50px;
+#address-input {
+  background-color: var(--grey);
+}
+
+#address-btn {
+  background-color: var(--grey);
+  border: none;
+}
+
+button {
+  background-color: var(--light-red);
+  color: var(--grey);
+  border-radius: 25px;
+  padding: 10px;
+  margin: 10px;
+  border: none;
+}
+
+button:hover {
+  background-color: var(--red);
+  color: white;
+  transition-duration: 0.4s;
+  transform: scale(1.15);
+}
+
+form {
+  padding: 21px;
+}
+
+#preferences-content {
+  font-size: 35px;
+  color: var(--grey);
+}
+
+#content {
+  border-color: var(--blue);
+}
+
+#text {
+  margin: 20px;
+}
+
+h1 {
+  font-weight: 1000;
+  font-size: 75px;
+  padding: 20px;
+  margin: 20px 20px 10px 20px;
+  color: var(--light-red);
+}
+
+p {
+  position: relative;
+  font-size: 25px;
+  color: var(--grey);
+  margin: 0px 10px 20px 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+input {
+  margin: 7px 0px;
+}
+
+input:hover {
+  cursor: pointer;
+}
+
+label {
+  display: inline-block;
+  margin: 7px;
+  padding: 12px;
+  font-size: 24px;
+  color: var(--grey);
+  text-align: center;
+  width: 20%;
+  position: relative;
+}
+
+#questionnaire-submit {
+  border: none;
+  color: var(--grey);
+  background-color: var(--light-red);
+  border-radius: 10px;
+  margin: 30px;
+  padding: 7px;
+}
+
+#questionnaire-submit:hover {
+  transition-duration: 0.4s;
+  transform: scale(1.1);
+  color: white;
+  background-color: var(--red);
+}
+
+*[data-state="hidden"] {
+  display: none;
+}
+
+*[data-state="visible"] {
+  display: block;
 }
