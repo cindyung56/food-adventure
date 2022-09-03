@@ -4,21 +4,33 @@ header {
     margin: 10px;
 }
 
+img{
+    object-fit: contain;
+    max-height: 500px;
+}
+
 .go {
     margin: 10px;
 }
 
 .resturant {
-    height: 200px;
+    height: 500px;
     width: 500px;
     background-color: rgb(150, 101, 40);
+}
+
+.container {
+    justify-content: space-between;
+}
+
+.contact{
+    text-align: center;
 }
 
 #map {
     background-color: bisque;
     justify-content: center;
-    height: 200px;
-    width: 300px;
+    height: 500px;
 }
 
 /* reviews {
@@ -26,7 +38,3 @@ header {
     color: rgb(7, 165, 113);
     height: 200px;
 } */
-
-.container {
-    justify-content: space-between;
-}
