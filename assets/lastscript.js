@@ -7,15 +7,25 @@ var view;
 var directionsService;
 var directionsDisplay;
 
-
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
 var destinationData;
-// destinationData.display_phone
+var destinationID;
+
+
+// gets the restaurant-specific ID from the parameters passed from location redirect
+function getDestinationID(){
+    var searchParamsArr = document.location.search.split("&");
+    // console.log(searchParamsArr);
+    destinationID = searchParamsArr[0].split("=").pop();
+    // console.log(destinationID);
+}
+
 
 //displays the imagelink and phone number of choosen resturant in previos page
-function restaurantSelected(restaurantID) {
-    var yelpApiUrl = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/" + restaurantID;
+function restaurantSelected() {
+    var yelpApiUrl = 
+    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/" + destinationID;
     //TODO: this URL is currently set to a specific location but should be based off of whichever business we chose in the previous page
     fetch(yelpApiUrl, {
         method: "GET",
@@ -30,7 +40,7 @@ function restaurantSelected(restaurantID) {
     .then(function(data){
         // console.log(data);
         destinationData = data;
-        console.log(destinationData.display_phone);
+        console.log(destinationData);
     })
 }
 
@@ -113,4 +123,5 @@ $(document).ready(function(){
 
 // ADDEVENTLISTENERS
 //btnEl.addEventListener("click", getLocation)
-restaurantSelected("VxA3A-DzCDV-DNgZP4ofqw");
+getDestinationID();
+restaurantSelected();
