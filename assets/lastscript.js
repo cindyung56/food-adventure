@@ -1,12 +1,13 @@
-var rowEl = document.querySelector("row");
-var resturantEl = document.querySelector("resturant");
-var btnEl = document.querySelector("btn");
-var reviewsEl = document.querySelector("reviews");
+var rowEl = document.querySelector(".row");
+var resturantEl = document.querySelector(".resturant");
+var btnEl = document.querySelector(".btn");
+var reviewsEl = document.querySelector(".reviews");
 var view;
 
 var directionsService;
 var directionsDisplay;
 
+var googleApiKey = "AIzaSyD-zlP4dk2Nr1EUDGh9L3tyxsSPQwnIBPA";
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
 var destinationData;
@@ -41,16 +42,26 @@ function restaurantSelected() {
         // console.log(data);
         destinationData = data;
         console.log(destinationData);
+        addRestaurantInfo();
     })
 }
 
+// add restaurant information to page
+function addRestaurantInfo(){
+    $('#restaurant-title').text(destinationData.name);
+    var destinationPhoneNumber = destinationData.display_phone;
+    $('.call').attr("href", "tel:"+ destinationPhoneNumber);
+    resturantEl.textContent = "";
+    resturantEl.innerHTML = "<img src=" + destinationData.image_url + " alt='image of restaurant'>";
+}
+
 //Adds marker
-function addMaker(location, map) {
-    console.log(location)
+function addMarker(location, map) {
+    console.log(location);
     let destination = new google.maps.LatLng(location.lat,location.lng)
 
     var marker = new google.maps.Marker({
-        postion:destination,
+        position:destination,
         map:map,
         title: "You are HERE",
      })
@@ -64,21 +75,23 @@ function initMap(pos, lat, lng){
         center: pos,
         zoom:12
     });
-    console.log(lat,lng);
-    var marke1 = addMaker({lat,lng}, map);
+    // console.log(lat,lng);
+    var marke1 = addMarker({lat,lng}, map);
     marke1.setAnimation(google.maps.Animation.DROP) ;
     marke1.setMap(map);
-    console.log(marke1);
-    var marke2 = addMaker({lat:34.052235,lng:-118.243683}, map);
+    // console.log(marke1);
+    var destinationLatitude = destinationData.coordinates.latitude;
+    var destinationLongitude = destinationData.coordinates.longitude;
+    var marke2 = addMarker({lat: destinationLatitude, lng: destinationLongitude}, map);
     marke2.setAnimation(google.maps.Animation.DROP) ;
     directionsService = new google.maps.DirectionsService();
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
-    let destination = new google.maps.LatLng( 34.052235,  -118.243683);
+    let destination = new google.maps.LatLng( destinationLatitude,  destinationLongitude);
 
     let request = {
         origin: {lat,lng},
-        destination: {lat:34.052235,  lng:-118.243683},
+        destination: {lat:destinationLatitude,  lng:destinationLongitude},
         optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING,
         
@@ -97,6 +110,7 @@ function initMap(pos, lat, lng){
 //pin points the users location 
 function mylocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
+    // console.log("My current position is: " + position.coords.latitude + ", " + position.coords.longitude);
     //view.innerHTML = {lat:position.coords.latitude, lng:position.coords.longitude}
     var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     initMap(pos, position.coords.latitude, position.coords.longitude);

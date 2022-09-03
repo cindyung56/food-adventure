@@ -96,7 +96,7 @@ function pickRandRestaurants(event) {
       console.log("Success YELP:", data);
       for (var i = 0; i < data.businesses.length; i++) {
         if (!data.businesses[i].is_closed && randRestaurants.length < 3) {
-          console.log(data.businesses[i].url)
+          // console.log(data.businesses[i].url)
           randRestaurants.push(data.businesses[i]);
         }
         if (randRestaurants < 3) {
@@ -162,9 +162,7 @@ function render() {
 
   // forEach function creates a list element for each preference option
   userChoices.forEach(function (newItem) {
-    // console.log(newItem);
     var listItem = $("<input>");
-    // console.log(listItem);
     listItem.attr({
       type: "checkbox",
       value: newItem,
@@ -190,13 +188,11 @@ function render() {
   questionnaireSubmitBtn.on("click", function (event) {
     event.preventDefault();
     var checkedInputs = $("input:checked");
-    // console.log(checkedInputs);
 
     storePreferences(currentKey, checkedInputs);
     questionIndex++;
     if (questionIndex === questions.length) {
       // TODO: go to next function to display results
-      console.log("last question has been answered");
       $(preferencesDivEl).empty();
       content.dataset.state = "visible";
     } else {
@@ -219,7 +215,6 @@ function storePreferences(key, values) {
   $.each(values, function () {
     optionsArray.push($(this).val());
   });
-  // console.log(optionsArray);
   localStorage.setItem(key, JSON.stringify(optionsArray));
 }
 
@@ -234,7 +229,7 @@ function presentRestaurants() {
     restContainer.append(restCard);
   }
   // NOTE: this line is just for testing purposes
-  // pageRedirect(randRestaurants[0].id);
+  pageRedirect(randRestaurants[0].id);
 }
 
 //Clear the div container
