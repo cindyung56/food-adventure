@@ -17,16 +17,26 @@ var latitude;
 var longitude;
 var randRestaurants;
 var questionIndex = 0;
+var formCreate = $("<form>");
 
 var dietaryAllergies;
 var dietaryRestrictions;
 var ethnicPreferences;
 var budgetPreference;
 
+// Get the user's zip code from localStorage if previously stored
+function getLocalZipCode(){
+  var zipCode = localStorage.getItem("zip-code");
+  if (zipCode !== null){
+    console.log("there is a saved zip code in localStorage")
+    userAddressInput.prop("placeholder", zipCode);
+    fetchYelpApiUrl(zipCode);
+  }
+}
+
 //Prompt the user to get their location data or have them enter address/zip code
 function getUserLocation(event) {
   event.preventDefault();
-  var zipCodeApiUrl = "https://thezipcodes.com/api/v1/search?zipCode=";
   if (isNaN(userAddressInput.val()) || userAddressInput.val().length > 5) {
     /*TODO add display to say they must enter a number*/
     console.log("NOT A NUMBER");
@@ -34,18 +44,28 @@ function getUserLocation(event) {
   }
   console.log(userAddressInput.val());
 
-  zipCodeApiUrl =
+  fetchYelpApiUrl(userAddressInput.val());
+}
+
+function fetchYelpApiUrl(userZipCode){
+    var zipCodeApiUrl = "https://thezipcodes.com/api/v1/search?zipCode=";
+    zipCodeApiUrl =
     zipCodeApiUrl +
-    userAddressInput.val() +
+    userZipCode +
     "&countryCode=US&apiKey=bb5257b61f84cbecea9a7c62f342c081";
 
   fetch(zipCodeApiUrl)
     .then((response) => response.json())
     .then((data) => {
       console.log("Success ZIP:", data);
+      $(randomBtn).prop("disabled", false);
+      $(userPreferencesBtn).prop("disabled", false);
       latitude = data.location[0].latitude;
       longitude = data.location[0].longitude;
       console.log(latitude + "\n" + longitude);
+
+      localStorage.setItem("zip-code", userZipCode);
+
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -76,6 +96,7 @@ function pickRandRestaurants(event) {
       console.log("Success YELP:", data);
       for (var i = 0; i < data.businesses.length; i++) {
         if (!data.businesses[i].is_closed && randRestaurants.length < 3) {
+          // console.log(data.businesses[i].url)
           randRestaurants.push(data.businesses[i]);
         }
         if (randRestaurants < 3) {
@@ -141,9 +162,7 @@ function render() {
 
   // forEach function creates a list element for each preference option
   userChoices.forEach(function (newItem) {
-    // console.log(newItem);
     var listItem = $("<input>");
-    // console.log(listItem);
     listItem.attr({
       type: "checkbox",
       value: newItem,
@@ -169,13 +188,11 @@ function render() {
   questionnaireSubmitBtn.on("click", function (event) {
     event.preventDefault();
     var checkedInputs = $("input:checked");
-    // console.log(checkedInputs);
 
     storePreferences(currentKey, checkedInputs);
     questionIndex++;
     if (questionIndex === questions.length) {
       // TODO: go to next function to display results
-      console.log("last question has been answered");
       $(preferencesDivEl).empty();
       content.dataset.state = "visible";
     } else {
@@ -198,7 +215,6 @@ function storePreferences(key, values) {
   $.each(values, function () {
     optionsArray.push($(this).val());
   });
-  // console.log(optionsArray);
   localStorage.setItem(key, JSON.stringify(optionsArray));
 }
 
@@ -216,6 +232,7 @@ function storePreferences(key, values) {
 // }
 
 function presentRestaurants() {
+  console.log('presentRestaurants is running');
   for (var i = 0; i < randRestaurants.length; i++) {
     var externalDiv = $('<div>').addClass('card mb-3');
     var rowDiv = $('<div>').addClass('row g-0');
@@ -231,19 +248,35 @@ function presentRestaurants() {
     externalDiv.append(rowDiv);
     restContainer.append(externalDiv);
   }
+  // NOTE: this line is just for testing purposes
+  pageRedirect(randRestaurants[0].id);
 }
 
-//.........................
 //Clear the div container
 function clearContainer() {
-  resultEl.classList.add("hide");
-  nextEl.classList.remove("hide");
-  restaurantNewPage();
+    restContainer.classList.add("hide")
+    nextEl.classList.remove("hide");
+    restaurantNewPage()
 }
-//.......................................
 
 //If they click on the restaurant, save the restaurant data in the URL and go to new page where more information is shown and mapping can be done
-function restaurantNewPage() {}
+function restaurantNewPage() {
+
+  var queryString = './search-results.html?q=' + searchInputVal + '&format=' + formatInputVal;
+
+  location.assign(queryString);
+}
+
+//randRestaurants.addEventListener('click', handleSearchFormSubmit);
+
+// Function that redirects page to lastindex.html whenever a restaurant has been chosen
+// TODO: link this function to the eventListeners whenever the user chooses a restaurant as their destination
+function pageRedirect(restaurantID){
+  var queryString = "./lastindex.html?id=" + restaurantID;
+  console.log(queryString);
+  location.assign(queryString)
+}
+
 
 //Event listeners
 userAddressInputBtn.on("click", getUserLocation);
@@ -256,4 +289,5 @@ userPreferencesBtn.on("click", function () {
   render();
 });
 
+getLocalZipCode();
 getPreferences();

@@ -1,19 +1,36 @@
 header {
     display: flex;
     justify-content: center;
-    margin: 20px;
+    margin: 10px;
 }
 
-section {
-    background-color: rgb(177, 218, 204);
-    height: 200px;
-    margin: 15px;
+img{
+    object-fit: contain;
+    max-height: 500px;
 }
 
-address {
-    justify-content: start;
+.go {
+    margin: 10px;
+}
+
+.resturant {
+    height: 500px;
+    width: 500px;
+    background-color: rgb(150, 101, 40);
+}
+
+.container {
+    justify-content: space-between;
+}
+
+.contact{
+    text-align: center;
+}
+
+#map {
     background-color: bisque;
-    margin: 20px;
+    justify-content: center;
+    height: 500px;
 }
 
 /* reviews {
@@ -21,7 +38,3 @@ address {
     color: rgb(7, 165, 113);
     height: 200px;
 } */
-
-.btn {
-    justify-content: center;
-}
