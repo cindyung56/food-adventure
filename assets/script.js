@@ -34,6 +34,8 @@ var dietaryRestrictions;
 var ethnicPreferences;
 var budgetPreference;
 
+var ethnicities = localStorage.key("ethnicities");
+
 // Get the user's zip code from localStorage if previously stored
 function getLocalZipCode() {
   var zipCode = localStorage.getItem("zip-code");
@@ -108,7 +110,7 @@ function pickRandRestaurants(event) {
       console.log("Success YELP:", data);
       for (var i = 0; i < data.businesses.length; i++) {
         if (!data.businesses[i].is_closed && randRestaurants.length < 3) {
-          console(data.businesses[i].url)
+          console(data.businesses[i].url);
           randRestaurants.push(data.businesses[i]);
         }
         if (randRestaurants < 3) {
@@ -219,20 +221,20 @@ function render() {
   });
 }
 
+// Function to display final results of questionnaire query
 function displayResults() {
-  fetchYelpApiUrl();
-  var ethnicities = localStorage.key("ethnicities");
   var yelpApiCurate =
     "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?category=restaurants" +
     "&" +
     latitude +
     "&" +
     longitude +
-    // preferences + "&" +
     "&" +
-    ethnicities +
+    ethnicPreferences +
+    "&" +
     "&limit=3" +
-    "&price=" +
+    "&" +
+    budgetPreference +
     "&open_now";
   console.log(yelpApiCurate);
 }
