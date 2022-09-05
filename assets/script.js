@@ -111,6 +111,7 @@ function pickRandRestaurants(event) {
       for (var i = 0; i < data.businesses.length; i++) {
         if (!data.businesses[i].is_closed && randRestaurants.length < 3) {
           console(data.businesses[i].url);
+          // console.log(data.businesses[i].url)
           randRestaurants.push(data.businesses[i]);
         }
         if (randRestaurants < 3) {
@@ -176,9 +177,7 @@ function render() {
 
   // forEach function creates a list element for each preference option
   userChoices.forEach(function (newItem) {
-    // console.log(newItem);
     var listItem = $("<input>");
-    // console.log(listItem);
     listItem.attr({
       type: "checkbox",
       value: newItem,
@@ -204,13 +203,11 @@ function render() {
   questionnaireSubmitBtn.on("click", function (event) {
     event.preventDefault();
     var checkedInputs = $("input:checked");
-    // console.log(checkedInputs);
 
     storePreferences(currentKey, checkedInputs);
     questionIndex++;
     if (questionIndex === questions.length) {
       // TODO: go to next function to display results
-      console.log("last question has been answered");
       $(preferencesDivEl).empty();
       content.dataset.state = "visible";
       displayResults();
@@ -253,12 +250,12 @@ function storePreferences(key, values) {
   $.each(values, function () {
     optionsArray.push($(this).val());
   });
-  // console.log(optionsArray);
   localStorage.setItem(key, JSON.stringify(optionsArray));
 }
 
 //Populates the empty div container with the result from the API call
 function presentRestaurants() {
+  console.log("presentRestaurants is running");
   for (var i = 0; i < randRestaurants.length; i++) {
     var restCard = $("<div>").addClass("rest-card");
     restCard.append($("<h1>").text(randRestaurants[i].name));
@@ -266,6 +263,8 @@ function presentRestaurants() {
     restCard.append($("<img>").attr("src", randRestaurants[i].image_url));
     restContainer.append(restCard);
   }
+  // NOTE: this line is just for testing purposes
+  pageRedirect(randRestaurants[0].id);
 }
 
 //Clear the div container
@@ -284,6 +283,14 @@ function restaurantNewPage() {
 }
 
 //randRestaurants.addEventListener('click', handleSearchFormSubmit);
+
+// Function that redirects page to lastindex.html whenever a restaurant has been chosen
+// TODO: link this function to the eventListeners whenever the user chooses a restaurant as their destination
+function pageRedirect(restaurantID) {
+  var queryString = "./lastindex.html?id=" + restaurantID;
+  console.log(queryString);
+  location.assign(queryString);
+}
 
 //Event listeners
 userAddressInputBtn.on("click", getUserLocation);
