@@ -59,6 +59,10 @@ p {
   border-radius: 10px;
 }
 
+form {
+  max-width: 600px;
+}
+
 /* input {
   margin: 7px 0px;
 } */
