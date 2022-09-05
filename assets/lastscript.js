@@ -33,7 +33,7 @@ function restaurantSelected(restaurantID) {
         return response.json();
     })
     .then(function(data){
-        // console.log(data);
+        console.log(data);
         destinationData = data;
         console.log(destinationData);
     })
@@ -101,10 +101,15 @@ function directions() {
      
 }
 
+function call() {
+    restaurantSelected(restaurantID)
+}
+
 //container displaying reviews about the resturant from yelp or google reviews.
 function review() {
-
+     yelpApiKey
 }
+
 $(document).ready(function(){
     mylocation();
 })
