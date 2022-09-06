@@ -159,7 +159,9 @@ function getReviews() {
     })
 }
 
-
+function getLocation() {
+    location.assign('https://www.google.com/maps/search/?api=1&query=' + destinationData.coordinates.latitude + ',' + destinationData.coordinates.longitude);
+}
 
 // ask user for current location upon page load
 $(document).ready(function(){
@@ -168,6 +170,6 @@ $(document).ready(function(){
 
 
 // ADDEVENTLISTENERS
-//btnEl.addEventListener("click", getLocation)
+btnEl.addEventListener("click", getLocation)
 getDestinationID();
 restaurantSelected();

@@ -1,7 +1,6 @@
 * {
   font-family: "DM Sans", sans-serif, "Lucida Sans", "Lucida Sans Regular",
     "Lucida Grande", "Lucida Sans Unicode", Verdana;
-  background-color: var(--blue);
 }
 
 *[data-state="hidden"] {
@@ -12,49 +11,14 @@
   display: block;
 }
 
-:root {
-  --light-red: #ef233c;
-  --red: #d80032;
-  --grey: #edf2f4;
-  --light-blue: #8d99ae;
-  --blue: #2b2d42;
-}
-
 body {
   margin: 45px;
   max-width: 100%;
-  background-color: var(--blue);
+  background-color: white;
 }
 
-#landing {
-  margin: 40px;
-  padding: 25px;
-  text-align: center;
-}
-
-#address-input {
-  background-color: var(--grey);
-}
-
-#address-btn {
-  background-color: var(--grey);
-  border: none;
-}
-
-button {
-  background-color: var(--light-red);
-  color: var(--grey);
-  border-radius: 25px;
-  padding: 10px;
-  margin: 10px;
-  border: none;
-}
-
-button:not(:disabled):hover {
-  background-color: var(--red);
-  color: white;
-  transition-duration: 0.4s;
-  transform: scale(1.15);
+header p {
+  color: #fb3c43;
 }
 
 button[disabled]{
@@ -65,39 +29,27 @@ form {
   padding: 21px;
 }
 
-#preferences-content {
-  font-size: 35px;
-  color: var(--grey);
+a {
+  text-decoration: none;
+  font-size: 2rem;
+  color: black;
+  font-weight: bold;
 }
 
-#content {
-  border-color: var(--blue);
-}
-
-#text {
-  margin: 20px;
-}
-
-h1 {
-  font-weight: 1000;
-  font-size: 75px;
-  padding: 20px;
-  margin: 20px 20px 10px 20px;
-  color: var(--light-red);
-}
 
 p {
   position: relative;
   font-size: 25px;
-  color: var(--grey);
+  color: black;
   margin: 0px 10px 20px 10px;
   padding: 10px;
   border-radius: 10px;
 }
 
-input {
-  margin: 7px 0px;
+form {
+  max-width: 600px;
 }
+
 
 input:hover {
   cursor: pointer;
@@ -114,10 +66,54 @@ label {
   position: relative;
 }
 
-#questionnaire-submit {
+.form-control {
+  width: 25%;
+}
+
+.card {
+  max-height: 400px;
+  height: 400px;
+}
+
+.card div {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.card div div {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.card div div img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+#landing {
+  margin: 40px;
+  padding: 25px;
+  text-align: center;
+}
+
+#preferences-content {
+  font-size: 35px;
+  color: black;
+}
+
+#preferences-content form {
+  margin: auto;
+}
+
+#text {
+  margin: 20px;
+}
+
+/* #questionnaire-submit {
   border: none;
-  color: var(--grey);
-  background-color: var(--light-red);
+  color: black;
+  background-color: #fb3c43;
   border-radius: 10px;
   margin: 30px;
   padding: 7px;
@@ -128,6 +124,6 @@ label {
   transform: scale(1.1);
   color: white;
   background-color: var(--red);
-}
+} */
 
 
