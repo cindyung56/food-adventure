@@ -112,15 +112,12 @@ function initMap(pos, lat, lng){
 function mylocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
     // console.log("My current position is: " + position.coords.latitude + ", " + position.coords.longitude);
-    //view.innerHTML = {lat:position.coords.latitude, lng:position.coords.longitude}
     var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     initMap(pos, position.coords.latitude, position.coords.longitude);
     
     });
 }
 
-
-    
 
 //TODO: button when clicked redirects you to google maps
 function directions() {
