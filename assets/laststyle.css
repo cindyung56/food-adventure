@@ -4,6 +4,17 @@ header {
     margin: 10px;
 }
 
+#home{
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 30px;
+    margin-left: 60px;
+    text-decoration: none;
+    color: black;
+
+}
+
 img{
     object-fit: contain;
     max-height: 500px;
