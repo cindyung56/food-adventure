@@ -211,9 +211,9 @@ function render() {
     if (questionIndex === questions.length) {
       // TODO: go to next function to display results
       $(preferencesDivEl).empty();
-      content.dataset.state = "visible";
-      displayResults();
+      // content.dataset.state = "visible";
       console.log(displayResults);
+      displayResults();
     } else {
       render();
     }
@@ -268,8 +268,19 @@ function displayResults() {
         createTableRow.appendChild(tableData);
         tableBody.appendChild(createTableRow);
       }
-      presentRestaurants();
+
+      displayRestaurants();
     });
+}
+
+function displayRestaurants(data) {
+  console.log("displayRestaurants is running");
+  var restaurant = data.business[0];
+  var restaurantDiv = document.getElementById("restaurant");
+  var restaurantName = restaurant.name;
+  var heading = document.createElement("h1");
+  heading.innerHTML = restaurantName;
+  restaurantDiv.append(heading);
 }
 
 //Get the preferences from local storage and store them in the global variables
@@ -300,7 +311,7 @@ function presentRestaurants() {
     restCard.append($("<img>").attr("src", randRestaurants[i].image_url));
     restContainer.append(restCard);
   }
-  // NOTE: this line is just for testing purposes, will not be in the final code
+  // NOTE: this line is just for testing purposes, =will not be in the final code
   // Currently chooses the very first restaurant and passes the unique ID to pageRedirect
   pageRedirect(randRestaurants[0].id);
 }
@@ -308,9 +319,9 @@ function presentRestaurants() {
 // Clear the div container
 // TODO: Currently not being used?
 function clearContainer() {
-    restContainer.classList.add("hide")
-    nextEl.classList.remove("hide");
-    // restaurantNewPage()
+  restContainer.classList.add("hide");
+  nextEl.classList.remove("hide");
+  // restaurantNewPage()
 }
 
 // If they click on the restaurant, save the restaurant data in the URL and go to new page where more information is shown and mapping can be done
@@ -323,7 +334,6 @@ function restaurantNewPage() {
   location.assign(queryString);
 }
 */
-
 
 // Function that redirects page to lastindex.html whenever a restaurant has been chosen
 // TODO: link this function to the eventListeners whenever the user chooses a restaurant as their destination
