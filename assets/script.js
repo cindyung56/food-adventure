@@ -252,35 +252,18 @@ function displayResults() {
     .then(function (data) {
       console.log(data);
       //Loop over the data
-      for (var i = 0; i < data.length; i++) {
-        // Creating elements, tablerow, tabledata, and anchor
-        var createTableRow = document.createElement("tr");
-        var tableData = document.createElement("td");
-        var link = document.createElement("a");
-
-        // Setting the text of link and the href of the link
-        link.textContent = data[i].html_url;
-        link.href = data[i].html_url;
-
-        // Appending the link to the tabledata and then appending the tabledata to the tablerow
-        // The tablerow then gets appended to the tablebody
-        tableData.appendChild(link);
-        createTableRow.appendChild(tableData);
-        tableBody.appendChild(createTableRow);
+      for (var i = 0; i < data.length; i++) {}
+      function displayRestaurants(data) {
+        console.log("displayRestaurants is running");
+        var restaurant = data.businesses[0];
+        var restaurantDiv = document.getElementById("restaurant");
+        var restaurantName = restaurant.name;
+        var heading = document.createElement("h1");
+        heading.innerHTML = restaurantName;
+        restaurantDiv.append(heading);
       }
-
       displayRestaurants();
     });
-}
-
-function displayRestaurants(data) {
-  console.log("displayRestaurants is running");
-  var restaurant = data.business[0];
-  var restaurantDiv = document.getElementById("restaurant");
-  var restaurantName = restaurant.name;
-  var heading = document.createElement("h1");
-  heading.innerHTML = restaurantName;
-  restaurantDiv.append(heading);
 }
 
 //Get the preferences from local storage and store them in the global variables
