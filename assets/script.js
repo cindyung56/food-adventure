@@ -183,7 +183,7 @@ function render() {
   });
   $(formCreate).append(nextBtn);
 
-  // TODO: Create response to log preferences to local storage and also take to next question
+  // logs preferences to local storage and also take to next question
   questionnaireSubmitBtn = $("#questionnaire-submit");
   questionnaireSubmitBtn.on("click", function (event) {
     event.preventDefault();
@@ -201,7 +201,7 @@ function render() {
   });
 }
 
-//Get the preferences from local storage and store them in the global variables
+// Get the preferences from local storage and store them in the global variables
 function getPreferences() {
   dietaryAllergies = JSON.parse(localStorage.getItem("allergies"));
   dietaryRestrictions = JSON.parse(localStorage.getItem("preferences"));
@@ -209,7 +209,7 @@ function getPreferences() {
   budgetPreference = JSON.parse(localStorage.getItem("cost"));
 }
 
-//Store the user preferences (allergies, location, cost) in localStorage
+// Store the user preferences (allergies, location, cost) in localStorage
 function storePreferences(key, values) {
   var optionsArray = [];
   $.each(values, function () {
@@ -218,19 +218,7 @@ function storePreferences(key, values) {
   localStorage.setItem(key, JSON.stringify(optionsArray));
 }
 
-//Populates the empty div container with the result from the API call
-// function presentRestaurants() {
-//   for (var i = 0; i < randRestaurants.length; i++) {
-//     var restCard = $('<div>').addClass('rest-card').addClass('card').addClass('text-bg-dark');
-//     var cardHead = $('<div>').addClass('card-head').addClass('card-img-overlay');
-//     restCard.append($("<img>").attr("src", randRestaurants[i].image_url).addClass('card-img'));
-//     cardHead.append($("<h1>").text(randRestaurants[i].name).addClass('card-title'));
-//     cardHead.append($("<p>").text(randRestaurants[i].rating).addClass('card-text'));
-//     restCard.append(cardHead);
-//     restContainer.append(restCard);
-//   }
-// }
-
+// Populates the empty div container with the result from the API call
 function presentRestaurants() {
   console.log('presentRestaurants is running');
   for (var i = 0; i < randRestaurants.length; i++) {
@@ -248,26 +236,30 @@ function presentRestaurants() {
     externalDiv.append(rowDiv);
     restContainer.append(externalDiv);
   }
-  // NOTE: this line is just for testing purposes
-  //pageRedirect(randRestaurants[0].id);
+  // NOTE: this line is just for testing purposes, will not be in the final code
+  // Currently chooses the very first restaurant and passes the unique ID to pageRedirect
+  pageRedirect(randRestaurants[0].id);
 }
 
-//Clear the div container
+// Clear the div container
+// TODO: Currently not being used?
 function clearContainer() {
     restContainer.classList.add("hide")
     nextEl.classList.remove("hide");
-    restaurantNewPage()
+    // restaurantNewPage()
 }
 
-//If they click on the restaurant, save the restaurant data in the URL and go to new page where more information is shown and mapping can be done
+// If they click on the restaurant, save the restaurant data in the URL and go to new page where more information is shown and mapping can be done
+// TODO: Might not be needed in the end because pageRedirect does the location redirect instead, this one has different naming sense
+/*
 function restaurantNewPage() {
 
   var queryString = './search-results.html?q=' + searchInputVal + '&format=' + formatInputVal;
 
   location.assign(queryString);
 }
+*/
 
-//randRestaurants.addEventListener('click', handleSearchFormSubmit);
 
 // Function that redirects page to lastindex.html whenever a restaurant has been chosen
 // TODO: link this function to the eventListeners whenever the user chooses a restaurant as their destination
@@ -289,5 +281,9 @@ userPreferencesBtn.on("click", function () {
   render();
 });
 
+// TODO: handleSearchFormSubmit does not exist atm
+//randRestaurants.addEventListener('click', handleSearchFormSubmit);
+
+// get values from localStorage, if any, when page is loaded
 getLocalZipCode();
 getPreferences();
