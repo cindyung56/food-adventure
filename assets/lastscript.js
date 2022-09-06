@@ -43,6 +43,7 @@ function restaurantSelected() {
         destinationData = data;
         console.log(destinationData);
         addRestaurantInfo();
+        getReviews();
     })
 }
 
@@ -68,7 +69,7 @@ function addMarker(location, map) {
      return marker
 }
 
-// determins what map is being used and the destination
+// determines what map is being used and the destination
 function initMap(pos, lat, lng){ 
     
     var map = new google.maps.Map(document.querySelector("#map"), {
@@ -121,15 +122,49 @@ function mylocation() {
 
     
 
-//button when clicked redirects you to google maps
+//TODO: button when clicked redirects you to google maps
 function directions() {
 
 }
 
-//container displaying reviews about the resturant from yelp or google reviews.
-function review() {
+// adds reviews into container talking about the resturant from yelp reviews
+// Current behavior: works but does not include all of the text...
+function getReviews() {
+    var yelpApiUrl = 
+    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/" + destinationID + "/reviews";
+    fetch(yelpApiUrl, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + yelpApiKey,
+          },
+    })
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        reviewsEl.textContent = "";
+        var reviewsArray = data.reviews;
 
+        for (var i = 0; i < reviewsArray.length; i++){
+            var currentReview = reviewsArray[i];
+
+            var reviewName = document.createElement("h3");
+            reviewName.textContent = currentReview.user.name + " rated this " + currentReview.rating + " / 5 stars";
+            
+            var reviewText = document.createElement("p");
+            reviewText.textContent = currentReview.text;
+            reviewText.setAttribute("style", "font-style: italic;");
+
+            reviewsEl.appendChild(reviewName);
+            reviewsEl.appendChild(reviewText);
+        }
+    })
 }
+
+
+
+// ask user for current location upon page load
 $(document).ready(function(){
     mylocation();
 })
