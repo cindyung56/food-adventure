@@ -209,7 +209,7 @@ function render() {
       // TODO: go to next function to display results
       $(preferencesDivEl).empty();
       // content.dataset.state = "visible";
-      console.log(displayResults);
+      // console.log(displayResults);
       displayResults();
     } else {
       render();
@@ -219,6 +219,9 @@ function render() {
 
 // Function to display final results of questionnaire query
 function displayResults() {
+  // console.log(ethnicPreferences, budgetPreference);
+  getPreferences();
+
   var yelpApiCurate =
     "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=restaurants" +
     "&latitude=" +
