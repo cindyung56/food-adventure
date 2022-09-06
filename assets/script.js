@@ -227,7 +227,7 @@ function presentRestaurants() {
     var textColumn = $('<div>').addClass('col-md-6');
     var imgColumn = $('<div>').addClass('col-md-6 card-image');
     var cardBody = $('<div>').addClass('card-body');
-    cardBody.append($("<h1>").text(randRestaurants[i].name).addClass('card-title').addClass('align-middle'));
+    cardBody.append($("<h1>").text(randRestaurants[i].name).addClass('card-title').addClass('align-middle').on('click', pageRedirect(randRestaurants[i].id)));
     cardBody.append($("<h1>").text(randRestaurants[i].rating).addClass('card-text').addClass('align-middle'));
     imgColumn.append($("<img>").attr("src", randRestaurants[i].image_url).addClass('card-img mh-100 mw-100 d-inline-block'));
     textColumn.append(cardBody);
@@ -238,7 +238,7 @@ function presentRestaurants() {
   }
   // NOTE: this line is just for testing purposes, will not be in the final code
   // Currently chooses the very first restaurant and passes the unique ID to pageRedirect
-  pageRedirect(randRestaurants[0].id);
+  //pageRedirect(randRestaurants[0].id);
 }
 
 // Clear the div container
