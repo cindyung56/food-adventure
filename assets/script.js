@@ -38,7 +38,7 @@ var budgetPreference;
 function getLocalZipCode() {
   var zipCode = localStorage.getItem("zip-code");
   if (zipCode !== null) {
-    console.log("there is a saved zip code in localStorage");
+    // console.log("there is a saved zip code in localStorage");
     userAddressInput.prop("placeholder", zipCode);
     fetchYelpApiUrl(zipCode);
   }
@@ -52,7 +52,7 @@ function getUserLocation(event) {
     console.log("NOT A NUMBER");
     return 0;
   }
-  console.log(userAddressInput.val());
+  // console.log(userAddressInput.val());
 
   fetchYelpApiUrl(userAddressInput.val());
 }
@@ -108,7 +108,7 @@ function pickRandRestaurants(event) {
       console.log("Success YELP:", data);
       for (var i = 0; i < data.businesses.length; i++) {
         if (!data.businesses[i].is_closed && randRestaurants.length < 3) {
-          console.log(data.businesses[i].url);
+          // console.log(data.businesses[i].url);
           randRestaurants.push(data.businesses[i]);
         }
         if (randRestaurants < 3) {
@@ -244,7 +244,7 @@ function displayResults() {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      // console.log(data);
       content.dataset.state = "visible";
       presentRestaurants(data.businesses);
     });
@@ -271,7 +271,7 @@ function storePreferences(key, values) {
 function presentRestaurants(restList) {
   var previousCards = document.querySelectorAll(".card");
   previousCards.forEach((element) => element.remove());
-  console.log(restList);
+  // console.log(restList);
   for (var i = 0; i < restList.length; i++) {
     var externalDiv = $("<div>").addClass("card mb-3");
     var rowDiv = $("<div>").addClass("row g-0");
@@ -327,7 +327,7 @@ function restaurantNewPage() {
 // Function that redirects page to lastindex.html whenever a restaurant has been chosen
 function pageRedirect(restaurantID) {
   var queryString = "./lastindex.html?id=" + restaurantID;
-  console.log(queryString);
+  // console.log(queryString);
   location.assign(queryString);
 }
 
