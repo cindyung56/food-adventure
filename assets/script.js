@@ -9,6 +9,8 @@ var preferencesDivEl = $("#preferences-content");
 
 var restContainer = $(".container");
 
+("Authorization: Bearer tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx");
+
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
 
@@ -110,7 +112,7 @@ function pickRandRestaurants(event) {
       console.log("Success YELP:", data);
       for (var i = 0; i < data.businesses.length; i++) {
         if (!data.businesses[i].is_closed && randRestaurants.length < 3) {
-          console(data.businesses[i].url);
+          console.log(data.businesses[i].url);
           // console.log(data.businesses[i].url)
           randRestaurants.push(data.businesses[i]);
         }
@@ -221,19 +223,53 @@ function render() {
 // Function to display final results of questionnaire query
 function displayResults() {
   var yelpApiCurate =
-    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?category=restaurants" +
+    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?" +
     "&" +
+    "latitude=" +
     latitude +
     "&" +
+    "longitude=" +
     longitude +
     "&" +
+    "categories=" +
     ethnicPreferences +
     "&" +
     "&limit=3" +
     "&" +
-    budgetPreference +
+    // budgetPreference +
     "&open_now";
   console.log(yelpApiCurate);
+  fetch(yelpApiCurate, {
+    method: "GET", // or 'PUT'
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + yelpApiKey,
+    },
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      //Loop over the data
+      for (var i = 0; i < data.length; i++) {
+        // Creating elements, tablerow, tabledata, and anchor
+        var createTableRow = document.createElement("tr");
+        var tableData = document.createElement("td");
+        var link = document.createElement("a");
+
+        // Setting the text of link and the href of the link
+        link.textContent = data[i].html_url;
+        link.href = data[i].html_url;
+
+        // Appending the link to the tabledata and then appending the tabledata to the tablerow
+        // The tablerow then gets appended to the tablebody
+        tableData.appendChild(link);
+        createTableRow.appendChild(tableData);
+        tableBody.appendChild(createTableRow);
+      }
+      presentRestaurants();
+    });
 }
 
 //Get the preferences from local storage and store them in the global variables
