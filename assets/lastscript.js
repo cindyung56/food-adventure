@@ -7,7 +7,6 @@ var view;
 var directionsService;
 var directionsDisplay;
 
-var googleApiKey = "AIzaSyD-zlP4dk2Nr1EUDGh9L3tyxsSPQwnIBPA";
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
 var destinationData;
@@ -17,9 +16,8 @@ var destinationID;
 // gets the restaurant-specific ID from the parameters passed from location redirect
 function getDestinationID(){
     var searchParamsArr = document.location.search.split("&");
-    // console.log(searchParamsArr);
     destinationID = searchParamsArr[0].split("=").pop();
-    // console.log(destinationID);
+    restaurantSelected();
 }
 
 
@@ -44,6 +42,7 @@ function restaurantSelected() {
         console.log(destinationData);
         addRestaurantInfo();
         getReviews();
+        mylocation();
     })
 }
 
@@ -65,8 +64,8 @@ function addMarker(location, map) {
         position:destination,
         map:map,
         title: "You are HERE",
-     })
-     return marker
+     });
+     return marker;
 }
 
 // determines what map is being used and the destination
@@ -76,18 +75,21 @@ function initMap(pos, lat, lng){
         center: pos,
         zoom:12
     });
-    // console.log(lat,lng);
+
     var marke1 = addMarker({lat,lng}, map);
     marke1.setAnimation(google.maps.Animation.DROP) ;
     marke1.setMap(map);
-    // console.log(marke1);
+
     var destinationLatitude = destinationData.coordinates.latitude;
     var destinationLongitude = destinationData.coordinates.longitude;
+
     var marke2 = addMarker({lat: destinationLatitude, lng: destinationLongitude}, map);
     marke2.setAnimation(google.maps.Animation.DROP) ;
+
     directionsService = new google.maps.DirectionsService();
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionsDisplay.setMap(map);
+
     let destination = new google.maps.LatLng( destinationLatitude,  destinationLongitude);
 
     let request = {
@@ -118,14 +120,7 @@ function mylocation() {
     });
 }
 
-
-//TODO: button when clicked redirects you to google maps
-function directions() {
-
-}
-
 // adds reviews into container talking about the resturant from yelp reviews
-// Current behavior: works but does not include all of the text...
 function getReviews() {
     var yelpApiUrl = 
     "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/" + destinationID + "/reviews";
@@ -159,6 +154,7 @@ function getReviews() {
     })
 }
 
+// redirects to Google Maps website with the destination latitude and longitude
 function getLocation() {
     location.assign('https://www.google.com/maps/search/?api=1&query=' + destinationData.coordinates.latitude + ',' + destinationData.coordinates.longitude);
 }
@@ -166,10 +162,8 @@ function getLocation() {
 // ask user for current location upon page load
 $(document).ready(function(){
     getDestinationID();
-    restaurantSelected();
-    mylocation();
+
 })
 
-
-// ADDEVENTLISTENERS
+// EVENT LISTENERS
 btnEl.addEventListener("click", getLocation)
