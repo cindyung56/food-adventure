@@ -165,11 +165,11 @@ function getLocation() {
 
 // ask user for current location upon page load
 $(document).ready(function(){
+    getDestinationID();
+    restaurantSelected();
     mylocation();
 })
 
 
 // ADDEVENTLISTENERS
 btnEl.addEventListener("click", getLocation)
-getDestinationID();
-restaurantSelected();

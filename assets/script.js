@@ -109,7 +109,6 @@ function pickRandRestaurants(event) {
       for (var i = 0; i < data.businesses.length; i++) {
         if (!data.businesses[i].is_closed && randRestaurants.length < 3) {
           console.log(data.businesses[i].url);
-          // console.log(data.businesses[i].url)
           randRestaurants.push(data.businesses[i]);
         }
         if (randRestaurants < 3) {
@@ -126,28 +125,30 @@ function pickRandRestaurants(event) {
 
 // User Preferences Questionaire
 var questions = [
-  //TODO: Features to add in the future - Allergies and adding dietary restriction preferences
-  // {
-  //   question: "Do you have any allergies?",
-  //   choices: [
-  //     "Milk",
-  //     "Tree nuts",
-  //     "Eggs",
-  //     "Peanuts",
-  //     "Fish",
-  //     "Wheat",
-  //     "Shellfish",
-  //     "Soybeans",
-  //     "None",
-  //   ],
-  //   keyValue: "allergies",
-  // },
-
-  // {
-  //   question: "Do you have any dietary preferences/restrictions?",
-  //   choices: ["Vegetarian", "Vegan", "Keto", "Kosher", "Gluten-Free"],
-  //   keyValue: "preferences",
-  // },
+  /*
+  TODO: Features to add in the future - Allergies and adding dietary restriction preferences
+  {
+    question: "Do you have any allergies?",
+    choices: [
+      "Milk",
+      "Tree nuts",
+      "Eggs",
+      "Peanuts",
+      "Fish",
+      "Wheat",
+      "Shellfish",
+      "Soybeans",
+      "None",
+    ],
+    keyValue: "allergies",
+  },
+  */
+  
+  {
+    question: "Do you have any dietary preferences/restrictions?",
+    choices: ["Vegetarian", "Vegan", "Keto", "Kosher", "Gluten-Free"],
+    keyValue: "preferences",
+  },
 
   {
     question: "Which food ethnicities do you prefer?",
@@ -206,10 +207,8 @@ function render() {
     storePreferences(currentKey, checkedInputs);
     questionIndex++;
     if (questionIndex === questions.length) {
-      // TODO: go to next function to display results
       $(preferencesDivEl).empty();
-      // content.dataset.state = "visible";
-      // console.log(displayResults);
+      // go to next function to display results
       displayResults();
     } else {
       render();
@@ -219,7 +218,6 @@ function render() {
 
 // Function to display final results of questionnaire query
 function displayResults() {
-  // console.log(ethnicPreferences, budgetPreference);
   getPreferences();
 
   var yelpApiCurate =
@@ -306,8 +304,9 @@ function presentRestaurants(restList) {
   //pageRedirect(randRestaurants[0].id);
 }
 
+/*
+// Currently not being used
 // Clear the div container
-// TODO: Currently not being used?
 function clearContainer() {
   restContainer.classList.add("hide");
   nextEl.classList.remove("hide");
@@ -316,7 +315,7 @@ function clearContainer() {
 
 // If they click on the restaurant, save the restaurant data in the URL and go to new page where more information is shown and mapping can be done
 // TODO: Might not be needed in the end because pageRedirect does the location redirect instead, this one has different naming sense
-/*
+
 function restaurantNewPage() {
   var queryString =
     "./search-results.html?q=" + searchInputVal + "&format=" + formatInputVal;
@@ -326,7 +325,6 @@ function restaurantNewPage() {
 */
 
 // Function that redirects page to lastindex.html whenever a restaurant has been chosen
-// TODO: link this function to the eventListeners whenever the user chooses a restaurant as their destination
 function pageRedirect(restaurantID) {
   var queryString = "./lastindex.html?id=" + restaurantID;
   console.log(queryString);
@@ -346,8 +344,9 @@ userPreferencesBtn.on("click", function () {
   render();
 });
 
-// TODO: handleSearchFormSubmit does not exist atm
+// NOTE: handleSearchFormSubmit does not exist atm
 //randRestaurants.addEventListener('click', handleSearchFormSubmit);
+
 
 // get values from localStorage, if any, when page is loaded
 getLocalZipCode();

@@ -21,10 +21,6 @@ header p {
   color: #fb3c43;
 }
 
-button[disabled]{
-  background-color: gray;
-}
-
 form {
   padding: 21px;
 }
