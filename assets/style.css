@@ -54,13 +54,13 @@ form {
   padding: 21px;
 }
 
-h1 {
+/* h1 {
   font-weight: 1000;
   font-size: 75px;
   padding: 20px;
   margin: 20px 20px 10px 20px;
   color: black;
-}
+} */
 
 p {
   position: relative;
@@ -112,6 +112,32 @@ label {
 } */
 .form-control {
   width: 25%;
+}
+
+.card {
+  max-height: 400px;
+}
+
+.card-image img {
+  object-fit: cover;
+  height: 15rem;
+  width: 100%;
+  transition: transform 0.2s;
+}
+
+.card {
+  overflow: hidden;
+  padding: 0px 0px;
+}
+
+.cardimage img:hover {
+  transform: scale(1.1);
+}
+
+.card-image {
+  width: 100%;
+  height: 15rem;
+  overflow: hidden;
 }
 
 #landing {

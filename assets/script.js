@@ -236,12 +236,12 @@ function presentRestaurants() {
   for (var i = 0; i < randRestaurants.length; i++) {
     var externalDiv = $('<div>').addClass('card mb-3');
     var rowDiv = $('<div>').addClass('row g-0');
-    var textColumn = $('<div>').addClass('col-md-8');
-    var imgColumn = $('<div>').addClass('col-md-4');
+    var textColumn = $('<div>').addClass('col-md-6');
+    var imgColumn = $('<div>').addClass('col-md-6 card-image');
     var cardBody = $('<div>').addClass('card-body');
-    cardBody.append($("<h1>").text(randRestaurants[i].name).addClass('card-title'));
-    cardBody.append($("<h1>").text(randRestaurants[i].rating).addClass('card-text'));
-    imgColumn.append($("<img>").attr("src", randRestaurants[i].image_url).addClass('card-img'));
+    cardBody.append($("<h1>").text(randRestaurants[i].name).addClass('card-title').addClass('align-middle'));
+    cardBody.append($("<h1>").text(randRestaurants[i].rating).addClass('card-text').addClass('align-middle'));
+    imgColumn.append($("<img>").attr("src", randRestaurants[i].image_url).addClass('card-img mh-100 mw-100 d-inline-block'));
     textColumn.append(cardBody);
     rowDiv.append(textColumn);
     rowDiv.append(imgColumn);
@@ -249,7 +249,7 @@ function presentRestaurants() {
     restContainer.append(externalDiv);
   }
   // NOTE: this line is just for testing purposes
-  pageRedirect(randRestaurants[0].id);
+  //pageRedirect(randRestaurants[0].id);
 }
 
 //Clear the div container
