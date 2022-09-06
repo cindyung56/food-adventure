@@ -9,8 +9,6 @@ var preferencesDivEl = $("#preferences-content");
 
 var restContainer = $("#landing");
 
-("Authorization: Bearer tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx");
-
 var yelpApiKey =
   "tilQS7iQb9uT4oDutOHFo7mguhA3WFGZJO8uiT3DWXhR59mn0QAaXi4kCwjEUwt2EeSftvh_vLt_YA5QiOxU7xPlxy_mYk9ZdpXzKSUrpL3iv3OAvt5AJxX4KHcOY3Yx";
 
@@ -35,8 +33,6 @@ var dietaryAllergies;
 var dietaryRestrictions;
 var ethnicPreferences;
 var budgetPreference;
-
-var ethnicities = localStorage.key("ethnicities");
 
 // Get the user's zip code from localStorage if previously stored
 function getLocalZipCode() {
@@ -121,7 +117,6 @@ function pickRandRestaurants(event) {
           return 0;
         }
       }
-
       presentRestaurants(randRestaurants);
     })
     .catch((error) => {
@@ -131,6 +126,7 @@ function pickRandRestaurants(event) {
 
 // User Preferences Questionaire
 var questions = [
+  //TODO: Features to add in the future - Allergies and adding dietary restriction preferences
   // {
   //   question: "Do you have any allergies?",
   //   choices: [
@@ -147,11 +143,11 @@ var questions = [
   //   keyValue: "allergies",
   // },
 
-  {
-    question: "Do you have any dietary preferences/restrictions?",
-    choices: ["Vegetarian", "Vegan", "Keto", "Kosher", "Gluten-Free"],
-    keyValue: "preferences",
-  },
+  // {
+  //   question: "Do you have any dietary preferences/restrictions?",
+  //   choices: ["Vegetarian", "Vegan", "Keto", "Kosher", "Gluten-Free"],
+  //   keyValue: "preferences",
+  // },
 
   {
     question: "Which food ethnicities do you prefer?",
@@ -160,8 +156,8 @@ var questions = [
   },
 
   {
-    question: "How much are you willing to spend?",
-    choices: ["$", "$$", "$$$", "$$$$"],
+    question: "How many Yelp dollar signs??",
+    choices: ["1", "2", "3", "4"],
     keyValue: "cost",
   },
 ];
@@ -197,7 +193,7 @@ function render() {
   nextBtn.attr({
     type: "submit",
     id: "questionnaire-submit",
-    class: 'btn btn-outline-dark',
+    class: "btn btn-outline-dark",
   });
   $(formCreate).append(nextBtn);
 
@@ -224,20 +220,16 @@ function render() {
 // Function to display final results of questionnaire query
 function displayResults() {
   var yelpApiCurate =
-    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?" +
-    "&" +
-    "latitude=" +
+    "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?categories=restaurants" +
+    "&latitude=" +
     latitude +
-    "&" +
-    "longitude=" +
+    "&longitude=" +
     longitude +
-    "&" +
-    "categories=" +
+    "&term=" +
     ethnicPreferences +
-    "&" +
     "&limit=3" +
-    "&" +
-    // budgetPreference +
+    "&price=" +
+    budgetPreference +
     "&open_now";
   console.log(yelpApiCurate);
   fetch(yelpApiCurate, {
@@ -254,10 +246,9 @@ function displayResults() {
       console.log(data);
       content.dataset.state = "visible";
       presentRestaurants(data.businesses);
-      })
+    });
 }
 
-//Get the preferences from local storage and store them in the global variables
 // Get the preferences from local storage and store them in the global variables
 function getPreferences() {
   dietaryAllergies = JSON.parse(localStorage.getItem("allergies"));
@@ -278,20 +269,29 @@ function storePreferences(key, values) {
 // Populates the empty div container with the result from the API call
 function presentRestaurants(restList) {
   var previousCards = document.querySelectorAll(".card");
-  previousCards.forEach(element => element.remove());
+  previousCards.forEach((element) => element.remove());
   console.log(restList);
   for (var i = 0; i < restList.length; i++) {
-    var externalDiv = $('<div>').addClass('card mb-3');
-    var rowDiv = $('<div>').addClass('row g-0');
-    var textColumn = $('<div>').addClass('col-md-6');
-    var imgColumn = $('<div>').addClass('col-md-6 card-image');
-    var cardBody = $('<div>').addClass('card-body');
-    if(i === 0) {
-      cardBody.append($('<h1>').text('Recommended Pick ☆').addClass('text-success'))
+    var externalDiv = $("<div>").addClass("card mb-3");
+    var rowDiv = $("<div>").addClass("row g-0");
+    var textColumn = $("<div>").addClass("col-md-6");
+    var imgColumn = $("<div>").addClass("col-md-6 card-image");
+    var cardBody = $("<div>").addClass("card-body");
+    if (i === 0) {
+      cardBody.append(
+        $("<h1>").text("Recommended Pick ☆").addClass("text-success")
+      );
     }
-    cardBody.append($("<a>").text(restList[i].name).addClass('card-title').attr('href', "./lastindex.html?id=" + restList[i].id));
-    cardBody.append($("<h1>").text(restList[i].rating).addClass('card-text'));
-    imgColumn.append($("<img>").attr("src", restList[i].image_url).addClass('card-img'));
+    cardBody.append(
+      $("<a>")
+        .text(restList[i].name)
+        .addClass("card-title")
+        .attr("href", "./lastindex.html?id=" + restList[i].id)
+    );
+    cardBody.append($("<h1>").text(restList[i].rating).addClass("card-text"));
+    imgColumn.append(
+      $("<img>").attr("src", restList[i].image_url).addClass("card-img")
+    );
     textColumn.append(cardBody);
     rowDiv.append(textColumn);
     rowDiv.append(imgColumn);
@@ -336,7 +336,7 @@ randomBtn.on("click", pickRandRestaurants);
 // Takes user to questionIndex
 userPreferencesBtn.on("click", function () {
   var previousCards = document.querySelectorAll(".card");
-  previousCards.forEach(element => element.remove());
+  previousCards.forEach((element) => element.remove());
   content.dataset.state = "hidden";
   $(preferencesDivEl).data("state", "visible");
   questionIndex = 0;
