@@ -37,9 +37,8 @@ function restaurantSelected() {
         return response.json();
     })
     .then(function(data){
-        // console.log(data);
         destinationData = data;
-        console.log(destinationData);
+        // console.log(destinationData);
         addRestaurantInfo();
         getReviews();
         mylocation();
@@ -57,7 +56,7 @@ function addRestaurantInfo(){
 
 //Adds marker
 function addMarker(location, map) {
-    console.log(location);
+    // console.log(location);
     let destination = new google.maps.LatLng(location.lat,location.lng)
 
     var marker = new google.maps.Marker({
